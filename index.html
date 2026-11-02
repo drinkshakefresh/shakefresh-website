@@ -20,6 +20,7 @@
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+/* Hide Netlify badge */
 #nl-badge-frame{display:none!important;}
 html{scroll-behavior:smooth;}
 body{
@@ -51,6 +52,40 @@ nav{
 }
 .nav-wordmark .nav-fresh{color:#8ECC2A!important;}
 
+/* ── LANG SWITCH ── */
+.lang-switch{
+  position:absolute;
+  right:max(28px,env(safe-area-inset-right,0px));
+  display:flex;align-items:center;gap:4px;
+}
+.lang-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:800;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+  padding:6px 4px;
+  transition:color .15s;
+  line-height:1;
+}
+.lang-btn.active{color:var(--green);}
+.lang-btn:hover:not(.active){color:rgba(255,255,255,0.7);}
+.lang-sep{color:rgba(255,255,255,0.15);font-size:11px;font-family:'Barlow Condensed',sans-serif;line-height:1;}
+.nav-membre{
+  position:absolute;
+  left:max(28px,env(safe-area-inset-left,0px));
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
+  text-decoration:none;
+  padding:6px 0;
+  transition:color .15s;
+  line-height:1;
+}
+.nav-membre:hover{color:var(--green);}
+
+
 /* ── HERO ── */
 .hero{
   min-height:100svh;
@@ -61,19 +96,14 @@ nav{
   position:relative;
   overflow:hidden;
 }
-/* Animated green orb */
+/* Green orb */
 .hero-orb{
   position:absolute;
   top:40%;left:50%;
   transform:translate(-50%,-50%);
   width:700px;height:700px;
   background:radial-gradient(circle,rgba(142,204,42,0.12) 0%,rgba(142,204,42,0.04) 40%,transparent 70%);
-  animation:pulse 4s ease-in-out infinite;
   pointer-events:none;
-}
-@keyframes pulse{
-  0%,100%{transform:translate(-50%,-50%) scale(1);}
-  50%{transform:translate(-50%,-50%) scale(1.12);}
 }
 /* Grain overlay */
 .hero::after{
@@ -89,9 +119,9 @@ nav{
   letter-spacing:0.2em;
   text-transform:uppercase;
   color:var(--white);
+  text-align:center;
   margin-bottom:32px;
   position:relative;z-index:1;
-  animation:logoIn 0.8s cubic-bezier(.16,1,.3,1) both;
   text-shadow:0 0 60px rgba(142,204,42,0.15);
 }
 .hero-ssg{
@@ -101,10 +131,6 @@ nav{
   background-clip:text;
 }
 .hero-ssg .sip{}
-@keyframes logoIn{
-  from{opacity:0;transform:translateY(24px);}
-  to{opacity:1;transform:translateY(0);}
-}
 .hero-tagline{
   font-family:'Barlow Condensed',sans-serif;
   font-size:clamp(13px,2vw,16px);
@@ -113,7 +139,6 @@ nav{
   color:var(--green);
   margin-bottom:20px;
   position:relative;z-index:1;
-  animation:fadeUp 0.8s 0.15s cubic-bezier(.16,1,.3,1) both;
 }
 .hero-h1{
   font-family:'Barlow Condensed',sans-serif;
@@ -123,9 +148,17 @@ nav{
   letter-spacing:-0.01em;
   text-wrap:balance;
   position:relative;z-index:1;
-  animation:fadeUp 0.8s 0.25s cubic-bezier(.16,1,.3,1) both;
 }
 .hero-h1 .hl{color:var(--green);}
+.hero-h1 sup{
+  font-size:0.22em;
+  font-weight:900;
+  position:relative;
+  top:-1.5em;
+  margin-left:-0.1em;
+  line-height:0;
+  letter-spacing:0;
+}
 .hero-h1 .block{display:block;}
 .hero-sub{
   margin-top:22px;
@@ -133,13 +166,18 @@ nav{
   color:var(--grey);
   max-width:480px;line-height:1.65;
   position:relative;z-index:1;
-  animation:fadeUp 0.8s 0.35s cubic-bezier(.16,1,.3,1) both;
+}
+.hero-footnote{
+  margin-top:16px;
+  font-size:11px;
+  color:rgba(255,255,255,0.28);
+  letter-spacing:0.03em;
+  position:relative;z-index:1;
 }
 .hero-actions{
   margin-top:38px;
   display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
   position:relative;z-index:1;
-  animation:fadeUp 0.8s 0.45s cubic-bezier(.16,1,.3,1) both;
 }
 .btn-main{
   background:var(--green);color:#000;
@@ -162,23 +200,6 @@ nav{
   transition:border-color .2s,color .2s;
 }
 .btn-line:hover{border-color:var(--green);color:var(--green);}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-/* Scroll indicator */
-.scroll-arrow{
-  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  color:rgba(255,255,255,0.2);font-size:10px;letter-spacing:0.12em;
-  text-transform:uppercase;font-weight:600;z-index:1;
-}
-.scroll-arrow svg{animation:arrowBounce 2s infinite;}
-@keyframes arrowBounce{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(6px);}
-}
-
 /* ── TICKER ── */
 .ticker{
   background:var(--green);
@@ -187,8 +208,8 @@ nav{
   white-space:nowrap;
 }
 .ticker-inner{
-  display:inline-flex;gap:0;
-  animation:scroll 18s linear infinite;
+  display:flex;width:max-content;gap:0;
+  animation:scroll 28s linear infinite;
 }
 .ticker-inner span{
   font-family:'Barlow Condensed',sans-serif;
@@ -199,7 +220,78 @@ nav{
 .ticker-inner .dot{color:rgba(0,0,0,0.35);padding:0;}
 @keyframes scroll{
   0%{transform:translateX(0);}
-  100%{transform:translateX(-50%);}
+  100%{transform:translateX(-25%);}
+}
+
+.venues-section{
+  padding:80px max(28px,env(safe-area-inset-left,0px)) 80px;
+  max-width:1080px;margin:0 auto;
+  text-align:center;
+}
+.venues-eyebrow{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:800;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--green);
+  margin-bottom:14px;
+}
+.venues-h2{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(32px,4.5vw,52px);
+  font-weight:900;text-transform:uppercase;
+  line-height:0.95;text-wrap:balance;
+  margin-bottom:48px;
+}
+.venues-h2 .hl{color:var(--green);}
+
+.concept-sub{
+  font-size:14px;
+  color:rgba(255,255,255,0.45);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;
+  margin-top:16px;
+  margin-bottom:32px;
+}
+.venues-sub{
+  font-size:14px;
+  color:rgba(255,255,255,0.45);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  margin-top:-28px;
+  margin-bottom:44px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;
+}
+.venues-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:16px;
+}
+.venue-card{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:10px;
+  padding:28px 16px 22px;
+  display:flex;flex-direction:column;
+  align-items:center;gap:12px;
+  transition:border-color .2s,transform .2s;
+}
+.venue-card:hover{
+  border-color:rgba(142,204,42,0.35);
+  transform:translateY(-3px);
+}
+.venue-icon{
+  font-size:28px;
+  width:52px;height:52px;
+  background:rgba(142,204,42,0.1);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+}
+.venue-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:800;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--white);
 }
 
 /* ── BIG STATS ── */
@@ -432,6 +524,234 @@ nav{
   line-height:1.6;
 }
 
+
+/* ── SIMULATOR ── */
+.simulator-section{
+  padding:96px max(28px,env(safe-area-inset-left,0px));
+  max-width:680px;margin:0 auto;
+  text-align:center;
+}
+.simulator-box{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:16px;
+  padding:48px 40px;
+  margin-top:48px;
+  position:relative;overflow:hidden;
+}
+.simulator-box::before{
+  content:'';
+  position:absolute;top:-2px;left:20%;right:20%;height:2px;
+  background:var(--green);
+  border-radius:0 0 4px 4px;
+}
+.sim-row{
+  margin-bottom:36px;
+  text-align:left;
+}
+.sim-label-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:12px;
+}
+.sim-label-text{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
+}
+.sim-val{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:30px;font-weight:900;font-style:italic;
+  color:var(--green);letter-spacing:0;line-height:1;
+}
+input[type=range].sim-slider{
+  -webkit-appearance:none;appearance:none;
+  width:100%;height:4px;
+  background:rgba(255,255,255,0.1);
+  border-radius:2px;outline:none;cursor:pointer;
+}
+input[type=range].sim-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 4px rgba(142,204,42,0.2);
+  transition:box-shadow .15s;
+}
+input[type=range].sim-slider::-webkit-slider-thumb:hover{
+  box-shadow:0 0 0 7px rgba(142,204,42,0.25);
+}
+.sim-price-row{
+  display:flex;gap:10px;margin-bottom:28px;
+}
+.sim-price-btn{
+  flex:1;
+  padding:10px 0;
+  background:rgba(255,255,255,0.06);
+  border:1.5px solid rgba(255,255,255,0.12);
+  border-radius:8px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:18px;font-weight:900;font-style:italic;
+  color:rgba(255,255,255,0.45);
+  cursor:pointer;
+  transition:all .15s;
+  letter-spacing:0.02em;
+}
+.sim-price-btn:hover{
+  border-color:var(--green);color:rgba(255,255,255,0.75);
+}
+.sim-price-btn.active{
+  background:rgba(90,220,90,0.12);
+  border-color:var(--green);
+  color:var(--green);
+}
+.sim-price-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+  margin-bottom:10px;
+}
+.sim-annual-row{
+  display:flex;align-items:baseline;gap:10px;
+  margin-top:28px;padding-top:24px;
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+.sim-annual-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+  flex-shrink:0;
+}
+.sim-annual-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:42px;font-weight:900;font-style:italic;
+  color:var(--green);
+  line-height:1;letter-spacing:-0.01em;
+  margin-left:auto;
+}
+.sim-annual-unit{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;font-weight:700;
+  color:rgba(255,255,255,0.35);
+  flex-shrink:0;
+}
+.sim-marge-row{
+  display:flex;gap:0;align-items:flex-start;
+}
+.sim-marge-col{
+  flex:1;
+}
+.sim-marge-col:last-child{text-align:right;}
+.sim-marge-sep{
+  width:1px;background:rgba(255,255,255,0.08);
+  margin:0 28px;align-self:stretch;flex-shrink:0;
+}
+.sim-marge-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+  margin-bottom:8px;
+}
+.sim-marge-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:38px;font-weight:900;font-style:italic;
+  color:rgba(255,255,255,0.8);
+  line-height:1;letter-spacing:-0.01em;
+}
+.sim-marge-unit{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;font-weight:700;
+  color:rgba(255,255,255,0.3);
+  margin-top:4px;
+}
+@media(max-width:500px){
+  .sim-marge-num{font-size:28px;}
+  .sim-marge-sep{margin:0 16px;}
+}
+.sim-price-note{
+  font-size:11px;color:rgba(255,255,255,0.22);
+  margin-top:10px;margin-bottom:0;line-height:1.5;
+  font-style:italic;
+}
+.sim-divider{
+  border:none;border-top:1px solid rgba(255,255,255,0.07);
+  margin:36px 0;
+}
+.sim-result-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  margin-bottom:12px;
+}
+.sim-result-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:72px;font-weight:900;font-style:italic;
+  color:var(--green);
+  line-height:1;
+  letter-spacing:-0.01em;
+}
+.sim-result-unit{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:22px;font-weight:700;
+  color:rgba(255,255,255,0.45);
+  margin-top:6px;
+}
+.sim-disclaimer{
+  font-size:11px;color:rgba(255,255,255,0.25);
+  margin-top:20px;line-height:1.5;
+}
+.sim-results-row{
+  display:flex;gap:0;align-items:flex-start;
+}
+.sim-daily-center{
+  text-align:center;
+  padding:8px 0;
+}
+.sim-revenue-row{
+  display:flex;gap:0;align-items:flex-start;
+}
+.sim-revenue-col{
+  flex:1;
+}
+.sim-revenue-col--right{
+  text-align:center;
+}
+.sim-revenue-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:52px;font-weight:900;font-style:italic;
+  color:var(--white);
+  line-height:1;
+}
+.sim-revenue-num--green{
+  color:var(--green);
+}
+.sim-result-col{
+  flex:1;
+}
+.sim-result-col:last-child{
+  text-align:right;
+}
+.sim-result-divider-v{
+  width:1px;background:rgba(255,255,255,0.08);
+  margin:0 28px;align-self:stretch;
+  flex-shrink:0;
+}
+.sim-result-num--daily{
+  font-size:48px;
+  color:rgba(255,255,255,0.55);
+}
+@media(max-width:500px){
+  .sim-result-num--daily{font-size:36px;}
+  .sim-result-divider-v{margin:0 16px;}
+}
+@media(max-width:500px){
+  .simulator-box{padding:36px 24px;}
+  .sim-result-num{font-size:56px;}
+}
+
 /* ── CONTACT ── */
 .contact-section{
   padding:96px max(28px,env(safe-area-inset-left,0px));
@@ -517,157 +837,348 @@ footer{
 .footer-logo{height:28px;width:auto;opacity:0.7;}
 .footer-copy{font-size:12px;color:rgba(255,255,255,0.25);letter-spacing:0.04em;}
 
-/* REVEAL animations */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
-.reveal.visible{opacity:1;transform:none;}
+/* REVEAL — always visible */
+.reveal{opacity:1;transform:none;}
+
+/* ── MACHINE SECTION ── */
+.machine-section{
+  padding:100px max(28px,env(safe-area-inset-left,0px));
+  max-width:1080px;margin:0 auto;
+}
+.machine-eyebrow{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:800;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--green);
+  margin-bottom:14px;
+}
+.machine-h2{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(36px,5vw,58px);
+  font-weight:900;text-transform:uppercase;
+  line-height:0.95;text-wrap:balance;
+  margin-bottom:48px;
+}
+.machine-h2 .hl{color:var(--green);}
+.machine-lead{
+  font-size:15px;color:var(--grey);
+  line-height:1.6;max-width:560px;
+  margin-bottom:48px;
+}
+.machine-body{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+  align-items:start;
+}
+@media(max-width:700px){
+  .machine-body{grid-template-columns:1fr;}
+}
+.machine-specs{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:8px;
+  overflow:hidden;
+}
+.spec-row{
+  display:flex;align-items:flex-start;
+  gap:16px;
+  padding:18px 24px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.spec-row:last-child{border-bottom:none;}
+.spec-icon{
+  flex-shrink:0;
+  width:32px;height:32px;
+  background:rgba(142,204,42,0.1);
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;
+}
+.spec-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--grey);
+  margin-bottom:3px;
+}
+.spec-val{
+  font-size:15px;font-weight:500;color:var(--white);
+  line-height:1.45;
+}
+.machine-support{
+  display:flex;flex-direction:column;gap:20px;
+}
+.support-card{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:8px;
+  padding:28px 24px;
+}
+.support-card.green-border{
+  border-color:rgba(142,204,42,0.3);
+}
+.support-card-icon{
+  font-size:24px;margin-bottom:14px;
+}
+.support-card-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:20px;font-weight:900;
+  text-transform:uppercase;letter-spacing:0.04em;
+  margin-bottom:8px;color:var(--white);
+}
+.support-card.green-border .support-card-title{color:var(--green);}
+.support-card-desc{
+  font-size:14px;color:var(--grey);line-height:1.6;
+}
+
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
+  <a class="nav-membre" href="#" data-i18n="nav-membre">Espace membre</a>
   <span class="nav-wordmark">SHAKE<span class="nav-fresh">FRESH</span></span>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="fr">FR</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-orb"></div>
-  <div class="hero-ssg">YOU TRAIN. WE SHAKE. YOU GO.</div>
-  <span class="hero-tagline">La nutrition instantanée en salle</span>
-  <h1 class="hero-h1">
+  <div class="hero-ssg"><span>YOU TRAIN. WE SHAKE.</span><br><span>YOU GO.</span></div>
+  <span class="hero-tagline" data-i18n="hero-tagline">La nutrition instantanée en salle</span>
+  <h1 class="hero-h1" data-i18n-html="hero-h1">
     <span class="block">Ton shake,</span>
-    <span class="block"><span class="hl">en 60 secondes.</span></span>
+    <span class="block"><span class="hl">en 60 secondes<sup>*</sup></span></span>
   </h1>
-  <p class="hero-sub">Jusqu'à 7 références sur mesure — protéines, suppléments &amp; option vegan. Le catalogue s'adapte à ta salle et tes adhérents. Revenus additionnels garantis.</p>
+  <p class="hero-sub" data-i18n="hero-sub">Jusqu'à 7 références sur mesure — protéines, suppléments &amp; option vegan. Le catalogue s'adapte à ta salle et tes adhérents. Revenus additionnels garantis.</p>
   <div class="hero-actions">
-    <a href="#contact" class="btn-main">Devenir partenaire</a>
-    <a href="#concept" class="btn-line">Découvrir le concept</a>
+    <a href="#contact" class="btn-main" data-i18n="btn-main">Devenir partenaire</a>
+    <a href="#concept" class="btn-line" data-i18n="btn-line">Découvrir le concept</a>
   </div>
-  <canvas id="runnerCanvas" style="position:absolute;bottom:50px;left:0;width:100%;height:140px;pointer-events:none;z-index:2;"></canvas>
+  <p class="hero-footnote" data-i18n="hero-footnote">* Selon les options choisies, la préparation peut aller jusqu'à 90 secondes.</p>
 </div>
 
 <!-- TICKER -->
 <div class="ticker">
-  <div class="ticker-inner" id="ticker">
-    <span>Shake. Sip. Go.</span><span class="dot">·</span>
-    <span>60 secondes</span><span class="dot">·</span>
-    <span>Nutrimuscle</span><span class="dot">·</span>
-    <span>0€ installation</span><span class="dot">·</span>
-    <span>7 références</span><span class="dot">·</span>
-    <span>24h/24</span><span class="dot">·</span>
-
-    <span>Shake. Sip. Go.</span><span class="dot">·</span>
-    <span>60 secondes</span><span class="dot">·</span>
-    <span>Nutrimuscle</span><span class="dot">·</span>
-    <span>0€ installation</span><span class="dot">·</span>
-    <span>7 références</span><span class="dot">·</span>
-    <span>24h/24</span><span class="dot">·</span>
-
-  </div>
+  <div class="ticker-inner" id="ticker"></div>
 </div>
 
 <!-- BIG STATS -->
 <div class="stats-section">
   <div class="big-stat reveal">
     <div class="big-stat-num">60s</div>
-    <div class="big-stat-label">Préparation du shake</div>
+    <div class="big-stat-label" data-i18n="stat-shake">Préparation du shake</div>
   </div>
   <div class="big-stat reveal">
     <div class="big-stat-num">21</div>
-    <div class="big-stat-label">Combinaisons possibles</div>
+    <div class="big-stat-label" data-i18n="stat-combos">Combinaisons possibles</div>
   </div>
   <div class="big-stat reveal">
     <div class="big-stat-num">0€</div>
-    <div class="big-stat-label">À l'installation</div>
+    <div class="big-stat-label" data-i18n="stat-install">À l'installation</div>
   </div>
   <div class="big-stat reveal">
     <div class="big-stat-num">24/7</div>
-    <div class="big-stat-label">Disponible en permanence</div>
+    <div class="big-stat-label" data-i18n="stat-avail">Disponible en permanence</div>
   </div>
 </div>
 
+<!-- VENUES SECTION -->
+<section class="venues-section reveal">
+  <p class="venues-eyebrow" data-i18n="venues-eyebrow">Pour qui ?</p>
+  <h2 class="venues-h2" data-i18n-html="venues-h2">Conçue pour <span class="hl">votre espace</span></h2>
+     <p class="venues-sub" data-i18n="venues-sub">Une utilisation en autonomie complète.</p>
+  <div class="venues-grid">
+    <div class="venue-card">
+      <div class="venue-icon">🏋️</div>
+      <div class="venue-name" data-i18n="venue-gym">Salle de sport</div>
+    </div>
+    <div class="venue-card">
+      <div class="venue-icon">🏨</div>
+      <div class="venue-name" data-i18n="venue-hotel">Hôtel</div>
+    </div>
+    <div class="venue-card">
+      <div class="venue-icon">🎓</div>
+      <div class="venue-name" data-i18n="venue-uni">Université</div>
+    </div>
+    <div class="venue-card">
+      <div class="venue-icon">🏢</div>
+      <div class="venue-name" data-i18n="venue-work">Entreprise</div>
+    </div>
+    <div class="venue-card">
+      <div class="venue-icon">🏊</div>
+      <div class="venue-name" data-i18n="venue-pool">Centre aquatique</div>
+    </div>
+    <div class="venue-card">
+      <div class="venue-icon">🌍</div>
+      <div class="venue-name" data-i18n="venue-other">Tout espace de vie active</div>
+    </div>
+  </div>
+</section>
+
 <!-- CONCEPT -->
 <section class="concept" id="concept">
-  <span class="eyebrow reveal">Comment ça marche</span>
-  <h2 class="section-h2 reveal">Simple. <span class="hl">Rapide.</span><br>Sans friction.</h2>
-  <p class="section-lead reveal">ShakeFresh s'installe dans votre salle, prend en charge tout le service nutritionnel, et vous rapporte un revenu mensuel régulier — sans que vous n'ayez rien à gérer.</p>
+  <span class="eyebrow reveal" data-i18n="concept-eyebrow">Comment ça marche ?</span>
+  <h2 class="section-h2 reveal" data-i18n-html="concept-h2">Simple. <span class="hl">Rapide.</span><br>Sans friction.</h2>
+  <p class="concept-sub reveal" data-i18n="concept-sub">En moins d'une minute, sans aucune interaction humaine.</p>
+  <p class="section-lead reveal" data-i18n="concept-lead">ShakeFresh s'installe dans votre salle, prend en charge tout le service nutritionnel, et vous rapporte un revenu mensuel régulier — sans que vous n'ayez rien à gérer.</p>
   <div class="steps">
     <div class="step reveal" data-n="1">
       <div class="step-icon">💪</div>
-      <div class="step-title">L'adhérent choisit</div>
-      <div class="step-desc">Écran tactile 27 pouces. Il choisit parmi 3 protéines, 3 suppléments (créatine, BCAA, collagène) et une option 100% vegan.</div>
+      <div class="step-title" data-i18n="step1-title">L'adhérent choisit</div>
+      <div class="step-desc" data-i18n="step1-desc">Il choisit parmi la sélection configurée pour ta salle — des références choisies avec toi, adaptées aux besoins de tes adhérents.</div>
     </div>
     <div class="step reveal" data-n="2">
       <div class="step-icon">⚡</div>
-      <div class="step-title">La machine prépare</div>
-      <div class="step-desc">En 60 secondes, la machine dose, mélange et sert. Fraîcheur garantie à chaque utilisation.</div>
+      <div class="step-title" data-i18n="step2-title">La machine prépare</div>
+      <div class="step-desc" data-i18n="step2-desc">En 60 à 90 secondes, la machine dose, mélange et sert. Fraîcheur garantie à chaque utilisation.</div>
     </div>
     <div class="step reveal" data-n="3">
       <div class="step-icon">💰</div>
-      <div class="step-title">Vous encaissez</div>
-      <div class="step-desc">Commission mensuelle automatique. Aucune gestion de votre côté. Nous gérons tout.</div>
+      <div class="step-title" data-i18n="step3-title">Vous encaissez</div>
+      <div class="step-desc" data-i18n="step3-desc">Commission mensuelle automatique. Aucune gestion de votre côté. Nous gérons tout.</div>
     </div>
   </div>
 </section>
 
 <!-- GREEN BREAK -->
 <div class="green-break">
-  <p class="green-break-q">Là quand vous en avez besoin —<br><em>dispo à tout moment.</em></p>
+  <p class="green-break-q" data-i18n-html="green-break">Là quand vous en avez besoin —<br><em>dispo à tout moment</em></p>
 </div>
 
-<!-- PARTNER SECTION -->
+
+  <!-- MACHINE SPECS -->
+  <section class="machine-section reveal">
+    <p class="machine-eyebrow" data-i18n="machine-eyebrow">La machine</p>
+    <h2 class="machine-h2" data-i18n-html="machine-h2">Sous le <span class="hl">capot</span></h2>
+    <div class="machine-body">
+      <div class="machine-specs">
+        <div class="spec-row">
+          <div class="spec-icon">⏱</div>
+          <div>
+            <div class="spec-label" data-i18n="spec-time-label">Préparation</div>
+            <div class="spec-val" data-i18n="spec-time-val">60 à 90 secondes — fraîche, froide, prête.</div>
+          </div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-icon">🖥</div>
+          <div>
+            <div class="spec-label" data-i18n="spec-screen-label">Interface</div>
+            <div class="spec-val" data-i18n="spec-screen-val">Écran tactile 27 pouces Android</div>
+          </div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-icon">🧴</div>
+          <div>
+            <div class="spec-label" data-i18n="spec-canisters-label">Ingrédients</div>
+            <div class="spec-val" data-i18n="spec-canisters-val">Jusqu'à 7 canisters (~4 L chacun)</div>
+          </div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-icon">💳</div>
+          <div>
+            <div class="spec-label" data-i18n="spec-pay-label">Paiement</div>
+            <div class="spec-val" data-i18n="spec-pay-val">Carte bancaire, sans contact</div>
+          </div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-icon">📡</div>
+          <div>
+            <div class="spec-label" data-i18n="spec-connect-label">Connectivité</div>
+            <div class="spec-val" data-i18n="spec-connect-val">Wi-Fi / 4G — supervision cloud en temps réel</div>
+          </div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-icon">📐</div>
+          <div>
+            <div class="spec-label" data-i18n="spec-dims-label">Dimensions</div>
+            <div class="spec-val">76 × 60 × 180 cm</div>
+          </div>
+        </div>
+      </div>
+      <div class="machine-support">
+        <div class="support-card green-border">
+          <div class="support-card-icon">🔧</div>
+          <div class="support-card-title" data-i18n="support-title">Maintenance & SAV</div>
+          <div class="support-card-desc" data-i18n="support-desc">Notre équipe gère l'entretien, le réapprovisionnement et l'hygiène. En cas de panne, intervention le jour même ou sous 48h maximum.</div>
+        </div>
+        <div class="support-card">
+          <div class="support-card-icon">📦</div>
+          <div class="support-card-title" data-i18n="restock-title">Réapprovisionnement</div>
+          <div class="support-card-desc" data-i18n="restock-desc">On s'occupe de tout. Vous ne gérez ni les stocks, ni les commandes, ni le nettoyage. Zéro contrainte de votre côté.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNER SECTION -->
 <section class="partner-section" id="partenariat">
-  <span class="eyebrow reveal">Votre salle, votre potentiel</span>
-  <h2 class="section-h2 reveal">Le bon deal<br><span class="hl">pour chaque salle.</span></h2>
-  <p class="section-lead reveal">Budget ou premium, studio ou grande chaîne — ShakeFresh s'adapte à votre positionnement.</p>
+  <span class="eyebrow reveal" data-i18n="partner-eyebrow">Votre salle, votre potentiel</span>
+  <h2 class="section-h2 reveal" data-i18n-html="partner-h2">Le bon deal<br><span class="hl">pour chaque salle de sport</span></h2>
+  <p class="section-lead reveal" data-i18n="partner-lead">Budget ou premium, studio ou grande chaîne — ShakeFresh s'adapte à votre positionnement.</p>
   <div class="partner-grid">
     <div class="partner-card reveal">
       <span class="partner-emoji">🏋️</span>
-      <div class="partner-title">Salle indépendante</div>
-      <div class="partner-desc">Offrez à vos membres un service premium sans investissement. La machine ShakeFresh devient un argument de différenciation réel face aux chaînes.</div>
+      <div class="partner-title" data-i18n="card1-title">Salle indépendante ?</div>
+      <div class="partner-desc" data-i18n="card1-desc">Offrez à vos membres un service premium sans investissement. La machine ShakeFresh devient un argument de différenciation réel face aux chaînes.</div>
     </div>
     <div class="partner-card reveal">
       <span class="partner-emoji">⚡</span>
-      <div class="partner-title">Salle déjà équipée</div>
-      <div class="partner-desc">Vous avez un bar ou des distributeurs ? ShakeFresh couvre les créneaux qu'ils ne couvrent pas : tôt le matin, tard le soir, week-end. Revenus additionnels, zéro compétition.</div>
+      <div class="partner-title" data-i18n="card2-title">Salle déjà équipée ?</div>
+      <div class="partner-desc" data-i18n="card2-desc">Vous avez un bar ou des distributeurs ? ShakeFresh comble ce qu'ils ne couvrent pas — horaires décalés, file d'attente, ou simplement l'adhérent qui préfère commander seul. Revenus additionnels, zéro compétition.</div>
     </div>
     <div class="partner-card reveal">
       <span class="partner-emoji">🏨</span>
-      <div class="partner-title">Hôtel &amp; résidence</div>
-      <div class="partner-desc">Un service haut de gamme pour vos clients sportifs. Disponible à toute heure, sans personnel supplémentaire.</div>
+      <div class="partner-title" data-i18n="card3-title">Hôtel &amp; résidence</div>
+      <div class="partner-desc" data-i18n="card3-desc">Un service haut de gamme pour vos clients sportifs. Disponible à toute heure, sans personnel supplémentaire.</div>
     </div>
   </div>
 </section>
 
 <!-- BRANDS -->
 <div class="brands-section">
-  <span class="eyebrow reveal">Sur mesure pour ta salle</span>
-  <h2 class="section-h2 reveal">Jusqu'à 7 références, <span class="hl">adaptées à tes clients.</span></h2>
-  <p class="section-lead reveal" style="margin:0 auto 32px;text-align:center;max-width:460px;">Le catalogue n'est pas figé — on le construit avec toi selon le profil de tes adhérents. Chaque salle a sa propre sélection.</p>
+  <span class="eyebrow reveal" data-i18n="brands-eyebrow">Sur mesure pour ta salle</span>
+  <h2 class="section-h2 reveal" data-i18n-html="brands-h2">Jusqu'à 7 références, <span class="hl">adaptées à tes clients</span></h2>
+  <p class="section-lead reveal" style="margin:0 auto 32px;text-align:center;max-width:460px;" data-i18n="brands-lead">Le catalogue n'est pas figé — on le construit avec toi selon le profil de tes adhérents. Chaque salle a sa propre sélection.</p>
   <div class="config-wrap reveal">
 
     <!-- Protéines -->
     <div class="config-group">
-      <div class="config-group-label">Protéines — choisis 1</div>
+      <div class="config-group-label" id="label-proteins" data-i18n="config-proteins">Protéines — choisis 1</div>
       <div class="config-pills" id="proteins">
         <div class="cpill" data-group="protein" data-name="Whey Vanille">🍦 Whey Vanille</div>
         <div class="cpill" data-group="protein" data-name="Whey Chocolat">🍫 Whey Chocolat</div>
         <div class="cpill" data-group="protein" data-name="Whey Fraise">🍓 Whey Fraise</div>
         <div class="cpill" data-group="protein" data-name="Whey Caramel">🍮 Whey Caramel</div>
-        <div class="cpill" data-group="protein" data-name="Whey Beurre de Cacahuète">🥜 Whey Cacahuète</div>
-        <div class="cpill" data-group="protein" data-name="Saveur Spéciale">⚡ Saveur Spéciale</div>
+        <div class="cpill" data-group="protein" data-name="Whey Beurre de Cacahuète">🍪 Cookies & Cream</div>
+        <div class="cpill" data-group="protein" data-name="Whey Myrtille">🫐 Whey Myrtille</div>
+        <div class="cpill" data-group="protein" data-name="Whey Café">☕ Whey Café</div>
+        <div class="cpill" data-group="protein" data-name="Whey Coco">🥥 Whey Coco</div>
+        <div class="cpill" data-group="protein" data-name="Whey Banane">🍌 Whey Banane</div>
+        <div class="cpill" data-group="protein" data-name="Isolat">🧊 Isolat</div>
+        <div class="cpill" data-group="protein" data-name="Gainer">🏋️ Gainer</div>
+        <div class="cpill" data-group="protein" data-name="Whey Vegan">🌱 Whey Vegan</div>
       </div>
     </div>
 
     <!-- Suppléments -->
     <div class="config-group">
-      <div class="config-group-label">Suppléments — choisis 1 ou +</div>
+      <div class="config-group-label" id="label-supps" data-i18n="config-supps">Suppléments — choisis 1 ou +</div>
       <div class="config-pills" id="supps">
         <div class="cpill" data-group="supp" data-name="Créatine">💪 Créatine</div>
         <div class="cpill" data-group="supp" data-name="BCAA">🔋 BCAA</div>
         <div class="cpill" data-group="supp" data-name="Collagène">✨ Collagène</div>
-        <div class="cpill" data-group="supp" data-name="Gainer">🏋️ Gainer</div>
-        <div class="cpill" data-group="supp" data-name="Option Vegan">🌿 Option Vegan</div>
+        <div class="cpill" data-group="supp" data-name="L-Carnitine">🔥 L-Carnitine</div>
+        <div class="cpill" data-group="supp" data-name="Électrolytes">⚡ Électrolytes</div>
+        <div class="cpill" data-group="supp" data-name="Glutamine">💊 Glutamine</div>
+        <div class="cpill" data-group="supp" data-name="Ashwagandha">🌿 Ashwagandha</div>
+        <div class="cpill" data-group="supp" data-name="Vitamine D">🔆 Vitamine D</div>
+        <div class="cpill" data-group="supp" data-name="Pré-workout">⚡ Pré-workout</div>
+        <div class="cpill" data-group="supp" data-name="Oméga-3">🐟 Oméga-3</div>
       </div>
     </div>
 
@@ -676,27 +1187,81 @@ footer{
       <div class="config-result-icon">🥤</div>
       <div class="config-result-text" id="configText"></div>
     </div>
-    <p class="config-note">Les références disponibles dans ta salle sont définies avec toi — ceci est un aperçu des options possibles.</p>
+    <p class="config-note" data-i18n="config-note">Les références disponibles dans ta salle sont définies avec toi — ceci est un aperçu des options possibles.</p>
 
   </div>
 </div>
 
 <!-- CONTACT -->
+
+<!-- SIMULATOR -->
+<section class="simulator-section reveal">
+  <span class="eyebrow" data-i18n="sim-eyebrow">Simulateur</span>
+  <h2 class="section-h2" data-i18n-html="sim-h2">Estimez votre <span class="hl">revenu mensuel</span></h2>
+  <div class="simulator-box">
+    <div class="sim-row">
+      <div class="sim-label-row">
+        <div class="sim-label-text" data-i18n="sim-members-label">Nombre d'adhérents</div>
+        <div class="sim-val" id="simMembersVal">600</div>
+      </div>
+      <input type="range" class="sim-slider" id="simMembers" min="100" max="5000" step="50" value="600">
+    </div>
+    <div class="sim-row">
+      <div class="sim-label-row">
+        <div class="sim-label-text" data-i18n-html="sim-rate-label">Taux d'utilisation <span style="opacity:.5;font-style:normal;font-weight:600">/ semaine</span></div>
+        <div class="sim-val" id="simRateVal">12%</div>
+      </div>
+      <input type="range" class="sim-slider" id="simRate" min="1" max="100" step="1" value="30">
+    </div>
+    <div class="sim-price-label" data-i18n="sim-price-label">Prix du shake</div>
+    <div class="sim-price-row">
+      <button class="sim-price-btn" data-price="2.99">2,99 €</button>
+      <button class="sim-price-btn active" data-price="3.99">3,99 €</button>
+      <button class="sim-price-btn" data-price="4.99">4,99 €</button>
+    </div>
+    <p class="sim-price-note" data-i18n="sim-price-note">Prix variable selon l'emplacement et les conditions convenues avec la salle</p>
+    <hr class="sim-divider">
+    <!-- Shakes / jour — centered -->
+    <div class="sim-daily-center">
+      <div class="sim-result-label" data-i18n="sim-daily-label">Shakes vendus / jour</div>
+      <div class="sim-result-num sim-result-num--daily" id="simDaily">—</div>
+      <div class="sim-result-unit" data-i18n="sim-daily-unit">shakes / jour</div>
+    </div>
+    <hr class="sim-divider" style="margin:24px 0;">
+    <!-- Revenu mois + an — side by side -->
+    <div class="sim-revenue-row">
+      <div class="sim-revenue-col">
+        <div class="sim-result-label" data-i18n="sim-marge-month-label">Revenu salle / mois</div>
+        <div class="sim-revenue-num" id="simResult">—</div>
+        <div class="sim-result-unit" data-i18n="sim-result-unit">€ / mois</div>
+      </div>
+      <div class="sim-result-divider-v"></div>
+      <div class="sim-revenue-col sim-revenue-col--right">
+        <div class="sim-result-label" data-i18n="sim-marge-year-label">Revenu salle / an</div>
+        <div class="sim-revenue-num sim-revenue-num--green" id="simMargeYear">—</div>
+        <div class="sim-result-unit" data-i18n="sim-result-unit-year">€ / an</div>
+      </div>
+    </div>
+    <p class="sim-disclaimer" id="simDisclaimer" data-i18n="sim-disclaimer">Estimation basée sur un prix de vente de 3,99 € / shake · Résultat à titre indicatif</p>
+    <p class="sim-disclaimer" style="margin-top:4px;" data-i18n="sim-marge-note">Le pourcentage est donné à titre illustratif — la part revenant à la salle est définie directement avec vous lors de l'accord de partenariat.</p>
+  </div>
+</section>
+
 <section class="contact-section" id="contact">
-  <span class="eyebrow reveal">On se parle ?</span>
-  <h2 class="section-h2 reveal">Intégrez<br><span class="hl">ShakeFresh.</span></h2>
-  <p class="section-lead reveal" style="margin:12px auto 0;text-align:center;max-width:400px;">Notre équipe répond en moins de 24h, 7j/7.</p>
+  <span class="eyebrow reveal" data-i18n="contact-eyebrow">On se parle ?</span>
+  <h2 class="section-h2 reveal" data-i18n-html="contact-h2">Intégrez<br><span class="hl">ShakeFresh</span></h2>
+  <p class="section-lead reveal" style="margin:12px auto 0;text-align:center;max-width:400px;" data-i18n="contact-lead">Notre équipe répond en moins de 24h, 7j/7.</p>
   <div class="contact-box reveal">
     <div class="contact-name">Sofiane Tagmi</div>
-    <div class="contact-role">Fondateur — ShakeFresh</div>
+    <div class="contact-role" data-i18n="contact-role">Fondateur — ShakeFresh</div>
     <a href="mailto:contact@shakefresh.fr" class="contact-email">contact@shakefresh.fr</a>
     <form class="contact-form" id="contactForm">
-      <input type="text" id="cf-nom" placeholder="Votre nom / salle" required>
-      <input type="email" id="cf-email" placeholder="Votre email" required>
-      <textarea id="cf-msg" placeholder="Votre message…" required></textarea>
-      <button type="submit" class="contact-cta" style="border:none;cursor:pointer;">Envoyer un message</button>
+      <input type="text" id="cf-nom" data-i18n-placeholder="ph-nom" placeholder="Votre nom / salle" required>
+      <input type="email" id="cf-email" data-i18n-placeholder="ph-email" placeholder="Votre email" required>
+      <textarea id="cf-msg" data-i18n-placeholder="ph-msg" placeholder="Votre message…" required></textarea>
+      <button type="submit" class="contact-cta" data-i18n="contact-cta" style="border:none;cursor:pointer;">Envoyer un message</button>
     </form>
-    <div class="form-sent" id="formSent">✓ Message envoyé — on revient vers vous sous 24h.</div>
+    <div class="form-sent" id="formSent" data-i18n="form-sent">✓ Message envoyé — on revient vers vous sous 24h.</div>
   </div>
 </section>
 
@@ -707,23 +1272,319 @@ footer{
 </footer>
 
 <script>
-// Intersection observer for reveal animations
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
-  });
-}, {threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+// ── TRANSLATIONS ──
+let currentLang = 'fr';
 
-// Contact form
-document.getElementById('contactForm').addEventListener('submit', function(e){
+const T = {
+  fr: {
+    'hero-tagline': `La nutrition instantanée en salle`,
+    'nav-membre': `Espace membre`,
+    'hero-h1': `<span class="block">Ton shake,</span><span class="block"><span class="hl">en 60 secondes<sup>*</sup></span></span>`,
+    'hero-sub': `Jusqu'à 7 références sur mesure — protéines, suppléments & option vegan. Le catalogue s'adapte à ta salle et tes adhérents. Revenus additionnels garantis.`,
+    'btn-main': `Devenir partenaire`,
+    'btn-line': `Découvrir le concept`,
+    'stat-shake': `Préparation du shake`,
+    'stat-combos': `Combinaisons possibles`,
+    'stat-install': `À l'installation`,
+    'stat-avail': `Disponible en permanence`,
+    'concept-eyebrow': `Comment ça marche ?`,
+        'concept-sub': `En moins d\'une minute, sans aucune interaction humaine.`,
+    'concept-h2': `Simple. <span class="hl">Rapide.</span><br>Sans friction.`,
+    'concept-lead': `ShakeFresh s'installe dans votre salle, prend en charge tout le service nutritionnel, et vous rapporte un revenu mensuel régulier — sans que vous n'ayez rien à gérer.`,
+    'step1-title': `L'adhérent choisit`,
+    'step1-desc': `Il choisit parmi la sélection configurée pour ta salle — des références choisies avec toi, adaptées aux besoins de tes adhérents.`,
+    'step2-title': `La machine prépare`,
+    'step2-desc': `En 60 à 90 secondes, la machine dose, mélange et sert. Fraîcheur garantie à chaque utilisation.`,
+    'step3-title': `Vous encaissez`,
+    'step3-desc': `Commission mensuelle automatique. Aucune gestion de votre côté. Nous gérons tout.`,
+    'green-break': `Là quand vous en avez besoin —<br><em>dispo à tout moment</em>`,
+    'partner-eyebrow': `Votre salle, votre potentiel`,
+    'partner-h2': `Le bon deal<br><span class="hl">pour chaque salle de sport</span>`,
+    'partner-lead': `Budget ou premium, studio ou grande chaîne — ShakeFresh s'adapte à votre positionnement.`,
+    'card1-title': `Salle indépendante ?`,
+    'card1-desc': `Offrez à vos membres un service premium sans investissement. La machine ShakeFresh devient un argument de différenciation réel face aux chaînes.`,
+    'card2-title': `Salle déjà équipée ?`,
+    'card2-desc': `Vous avez un bar ou des distributeurs ? ShakeFresh comble ce qu'ils ne couvrent pas — horaires décalés, file d'attente, ou simplement l'adhérent qui préfère commander seul. Revenus additionnels, zéro compétition.`,
+    'card3-title': `Hôtel & résidence ?`,
+    'card3-desc': `Un service haut de gamme pour vos clients sportifs. Disponible à toute heure, sans personnel supplémentaire.`,
+    'brands-eyebrow': `Sur mesure pour ta salle`,
+    'brands-h2': `Jusqu'à 7 références, <span class="hl">adaptées à tes clients</span>`,
+    'brands-lead': `Le catalogue n'est pas figé — on le construit avec toi selon le profil de tes adhérents. Chaque salle a sa propre sélection.`,
+    'config-proteins': `Protéines — choisis 1`,
+    'config-supps': `Suppléments — choisis 1 ou +`,
+    'config-note': `Les références disponibles dans ta salle sont définies avec toi — ceci est un aperçu des options possibles.`,
+    'contact-eyebrow': `On se parle ?`,
+    'sim-eyebrow': `Simulateur`,
+    'sim-h2': `Estimez votre <span class="hl">revenu mensuel</span>`,
+    'sim-members-label': `Nombre d'adhérents`,
+    'sim-rate-label': `Taux d'utilisation <span style="opacity:.5;font-style:normal;font-weight:600">/ semaine</span>`,
+    'sim-result-label': `Revenu salle / mois`,
+    'sim-result-unit': `€ / mois`,
+    'sim-result-unit-year': `€ / an`,
+    'sim-price-label': `Prix du shake`,
+    'sim-price-note': `Prix variable selon l'emplacement et les conditions convenues avec la salle`,
+    'sim-marge-month-label': `Revenu salle / mois`,
+    'sim-marge-year-label': `Revenu salle / an`,
+    'sim-marge-note': `Le pourcentage est donn\u00e9 \u00e0 titre illustratif \u2014 la part revenant \u00e0 la salle est d\u00e9finie directement avec vous lors de l'accord de partenariat.`,
+    'sim-daily-label': `Shakes vendus / jour`,
+    'sim-daily-unit': `shakes / jour`,
+    'sim-disclaimer': `Estimation basée sur un prix de vente de 3,99 € / shake · Résultat à titre indicatif`,
+    'sim-disclaimer-en': `Estimate based on a selling price of €3.99 / shake · Indicative result`,
+    'contact-h2': `Intégrez<br><span class="hl">ShakeFresh</span>`,
+    'contact-lead': `Notre équipe répond en moins de 24h, 7j/7.`,
+    'contact-role': `Fondateur — ShakeFresh`,
+    'ph-nom': `Votre nom / salle`,
+    'ph-email': `Votre email`,
+    'ph-msg': `Votre message…`,
+    'contact-cta': `Envoyer un message`,
+    'form-sent': `✓ Message envoyé — on revient vers vous sous 24h.`,
+    ticker: [`Shake. Sip. Go.`, `60 secondes`, `0€ installation`, `7 références`, `+20 combinaisons`, `24h/24`],
+        'hero-footnote': `* Selon les options choisies, la préparation peut aller jusqu'à 90 secondes.`,
+        'venues-eyebrow': `Pour qui ?`,
+        'venues-sub': `Une utilisation en autonomie complète.`,
+        'venues-h2': `Conçue pour <span class="hl">votre espace</span>`,
+        'venue-gym': `Salle de sport`,
+        'venue-hotel': `Hôtel`,
+        'venue-uni': `Université`,
+        'venue-work': `Entreprise`,
+        'venue-pool': `Centre aquatique`,
+        'venue-other': `Tout espace de vie active`,
+        'machine-eyebrow': `La machine`,
+        'machine-lead': ``,
+        'machine-h2': `Sous le <span class="hl">capot</span>`,
+        'spec-time-label': `Préparation`,
+        'spec-time-val': `60 à 90 secondes — fraîche, froide, prête.`,
+        'spec-screen-label': `Interface`,
+        'spec-screen-val': `Écran tactile 27 pouces Android`,
+        'spec-canisters-label': `Ingrédients`,
+        'spec-canisters-val': `Jusqu'à 7 canisters (~4 L chacun)`,
+        'spec-pay-label': `Paiement`,
+        'spec-pay-val': `Carte bancaire, sans contact`,
+        'spec-connect-label': `Connectivité`,
+        'spec-connect-val': `Wi-Fi / 4G — supervision cloud en temps réel`,
+        'spec-dims-label': `Dimensions`,
+        'support-title': `Maintenance & SAV`,
+        'support-desc': `Notre équipe gère l'entretien, le réapprovisionnement et l'hygiène. En cas de panne, intervention le jour même ou sous 48h maximum.`,
+        'restock-title': `Réapprovisionnement`,
+        'restock-desc': `On s'occupe de tout. Vous ne gérez ni les stocks, ni les commandes, ni le nettoyage. Zéro contrainte de votre côté.`,
+  },
+  en: {
+    'hero-tagline': `Instant nutrition at your gym`,
+    'nav-membre': `Espace membre`,
+    'nav-membre': `Member area`,
+    'hero-h1': `<span class="block">Your shake,</span><span class="block"><span class="hl">in 60 seconds<sup>*</sup></span></span>`,
+    'hero-sub': `Up to 7 custom options — proteins, supplements & vegan option. The catalog adapts to your gym and your members. Guaranteed additional revenue.`,
+    'btn-main': `Become a partner`,
+    'btn-line': `Discover the concept`,
+    'stat-shake': `Shake preparation`,
+    'stat-combos': `Possible combinations`,
+    'stat-install': `At installation`,
+    'stat-avail': `Always available`,
+    'concept-eyebrow': `How it works ?`,
+        'concept-sub': `Under a minute. Fully autonomous.`,
+    'concept-h2': `Simple. <span class="hl">Fast.</span><br>No friction.`,
+    'concept-lead': `ShakeFresh installs in your gym, takes care of the entire nutrition service, and earns you a steady monthly income — with zero management on your end.`,
+    'step1-title': `Members choose`,
+    'step1-desc': `They choose from the selection configured for your gym — options chosen with you, tailored to your members' needs.`,
+    'step2-title': `Machine prepares`,
+    'step2-desc': `In 60 to 90 seconds, the machine doses, blends and serves. Fresh every time.`,
+    'step3-title': `You earn`,
+    'step3-desc': `Automatic monthly commission. No management required on your end. We handle everything.`,
+    'green-break': `There when you need it —<br><em>available at all times</em>`,
+    'partner-eyebrow': `Your gym, your potential`,
+    'partner-h2': `The right deal<br><span class="hl">for every gym</span>`,
+    'partner-lead': `Budget or premium, studio or chain — ShakeFresh adapts to your positioning.`,
+    'card1-title': `Independent gym ?`,
+    'card1-desc': `Offer your members a premium service with zero investment. The ShakeFresh machine becomes a real differentiator against chains.`,
+    'card2-title': `Already equipped ?`,
+    'card2-desc': `You have a bar or vending machines? ShakeFresh fills the gaps — off-hours, long queues, or members who just prefer not to interact. Additional revenue, zero competition.`,
+    'card3-title': `Hotel & residence ?`,
+    'card3-desc': `A high-end service for your athletic guests. Available at all hours, no extra staff needed.`,
+    'brands-eyebrow': `Tailored to your gym`,
+    'brands-h2': `Up to 7 options, <span class="hl">adapted to your members</span>`,
+    'brands-lead': `The catalog is not fixed — we build it with you based on your members' profiles. Each gym has its own selection.`,
+    'config-proteins': `Proteins — pick 1`,
+    'config-supps': `Supplements — pick 1 or more`,
+    'config-note': `The options available in your gym are defined with you — this is a preview of the possible choices.`,
+    'contact-eyebrow': `Let's talk.`,
+    'sim-eyebrow': `Revenue estimator`,
+    'sim-h2': `Estimate your <span class="hl">monthly revenue</span>`,
+    'sim-members-label': `Number of members`,
+    'sim-rate-label': `Usage rate <span style="opacity:.5;font-style:normal;font-weight:600">/ week</span>`,
+    'sim-result-label': `Gym revenue / month`,
+    'sim-result-unit': `€ / month`,
+    'sim-result-unit-year': `€ / year`,
+    'sim-price-label': `Shake price`,
+    'sim-price-note': `Price varies depending on the venue and the terms agreed with the gym`,
+    'sim-marge-month-label': `Gym revenue / month`,
+    'sim-marge-year-label': `Gym revenue / year`,
+    'sim-marge-note': `The percentage shown is indicative — the gym's actual share is agreed directly with you as part of the partnership.`,
+    'sim-daily-label': `Shakes sold / day`,
+    'sim-daily-unit': `shakes / day`,
+    'sim-disclaimer': `Estimate based on a selling price of €3.99 / shake · Indicative result`,
+    'contact-h2': `Join<br><span class="hl">ShakeFresh</span>`,
+    'contact-lead': `Our team responds in under 24h, 7 days a week.`,
+    'contact-role': `Founder — ShakeFresh`,
+    'ph-nom': `Your name / gym`,
+    'ph-email': `Your email`,
+    'ph-msg': `Your message…`,
+    'contact-cta': `Send a message`,
+    'form-sent': `✓ Message sent — we'll get back to you within 24h.`,
+    ticker: [`Shake. Sip. Go.`, `60 secondes`, `Free install`, `7 options`, `+20 combinations`, `24/7`],
+        'hero-footnote': `* Depending on the options selected, preparation may take up to 90 seconds.`,
+        'venues-eyebrow': `For who ?`,
+        'venues-sub': `Fully autonomous operation.`,
+        'venues-h2': `Built for <span class="hl">your space</span>`,
+        'venue-gym': `Gym`,
+        'venue-hotel': `Hotel`,
+        'venue-uni': `University`,
+        'venue-work': `Workplace`,
+        'venue-pool': `Aquatic centre`,
+        'venue-other': `Any active lifestyle space`,
+        'machine-eyebrow': `The machine`,
+        'machine-lead': ``,
+        'machine-h2': `Inside the <span class="hl">machine</span>`,
+        'spec-time-label': `Preparation`,
+        'spec-time-val': `60 to 90 seconds — fresh, chilled, ready.`,
+        'spec-screen-label': `Interface`,
+        'spec-screen-val': `27-inch Android touchscreen`,
+        'spec-canisters-label': `Ingredients`,
+        'spec-canisters-val': `Up to 7 canisters (~4 L each)`,
+        'spec-pay-label': `Payment`,
+        'spec-pay-val': `Card, contactless`,
+        'spec-connect-label': `Connectivity`,
+        'spec-connect-val': `Wi-Fi / 4G — real-time cloud monitoring`,
+        'spec-dims-label': `Dimensions`,
+        'support-title': `Maintenance & Support`,
+        'support-desc': `Our team handles servicing, restocking and hygiene. In case of a breakdown, we intervene the same day or within 48 hours maximum.`,
+        'restock-title': `Restocking`,
+        'restock-desc': `We take care of everything. No inventory, no orders, no cleaning on your end. Zero hassle.`,
+  }
+};
+
+// ── BUILD TICKER ──
+function buildTicker(lang) {
+  const items = T[lang].ticker;
+  const ticker = document.getElementById('ticker');
+  let html = '';
+  // Double the content for seamless loop
+  for (let i = 0; i < 4; i++) {
+    items.forEach(function(item) {
+      html += '<span>' + item + '</span><span class="dot">·</span>';
+    });
+  }
+  ticker.innerHTML = html;
+}
+
+// ── SET LANGUAGE ──
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var v = T[lang][el.dataset.i18n];
+    if (v !== undefined) el.textContent = v;
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+    var key = el.dataset.i18nHtml;
+    var v = T[lang][key];
+    if (v !== undefined) el.innerHTML = v;
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+    var key = el.dataset.i18nPlaceholder;
+    var v = T[lang][key];
+    if (v !== undefined) el.placeholder = v;
+  });
+
+  buildTicker(lang);
+
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+
+
+// ── SIMULATOR ──
+(function(){
+  var members  = document.getElementById('simMembers');
+  var rate     = document.getElementById('simRate');
+  var resEl    = document.getElementById('simResult');
+  var dailyEl  = document.getElementById('simDaily');
+  var mVal     = document.getElementById('simMembersVal');
+  var rVal     = document.getElementById('simRateVal');
+  var discEl   = document.getElementById('simDisclaimer');
+  var SHARE    = 0.12; // gym revenue share
+  var PRICE    = 3.99; // default
+
+  // Price buttons
+  var priceBtns = document.querySelectorAll('.sim-price-btn');
+  priceBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      priceBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      PRICE = parseFloat(btn.dataset.price);
+      updateDisclaimer();
+      calc();
+    });
+  });
+
+  function updateDisclaimer(){
+    var lang = document.documentElement.lang || 'fr';
+    var priceStr = PRICE.toFixed(2).replace('.',',');
+    if(lang === 'en'){
+      discEl.textContent = 'Estimate based on a selling price of \u20ac' + PRICE.toFixed(2) + ' / shake \u00b7 Indicative result';
+    } else {
+      discEl.textContent = 'Estimation bas\u00e9e sur un prix de vente de ' + priceStr + ' \u20ac / shake \u00b7 R\u00e9sultat \u00e0 titre indicatif';
+    }
+  }
+
+  function calc(){
+    var m = parseInt(members.value);
+    var r = parseInt(rate.value) / 100;
+    var monthlyShakes = m * r * 4;
+    var totalCA    = Math.round(monthlyShakes * PRICE);
+    var daily       = Math.round(monthlyShakes / 30);
+    var margeMonth  = Math.round(totalCA * SHARE);
+    var margeYear   = Math.round(margeMonth * 12);
+    mVal.textContent = m.toLocaleString('fr-FR');
+    rVal.textContent = rate.value + '%';
+    resEl.textContent = margeMonth.toLocaleString('fr-FR');
+    dailyEl.textContent = daily;
+    document.getElementById('simMargeYear').textContent = margeYear.toLocaleString('fr-FR');
+  }
+  members.addEventListener('input', calc);
+  rate.addEventListener('input', calc);
+  calc();
+})();
+
+// ── LANG BUTTON LISTENERS ──
+document.querySelectorAll('.lang-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    setLang(this.dataset.lang);
+  });
+});
+
+// ── INIT ──
+setLang('fr');
+
+// ── CONTACT FORM ──
+document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const nom = document.getElementById('cf-nom').value;
-  const email = document.getElementById('cf-email').value;
-  const msg = document.getElementById('cf-msg').value;
-  const subject = encodeURIComponent('Demande partenariat ShakeFresh — ' + nom);
-  const body = encodeURIComponent('Nom / Salle : ' + nom + '\nEmail : ' + email + '\n\n' + msg);
-  const a = document.createElement('a');
+  var nom = document.getElementById('cf-nom').value;
+  var email = document.getElementById('cf-email').value;
+  var msg = document.getElementById('cf-msg').value;
+  var subject, bodyPrefix;
+  if (currentLang === 'fr') {
+    subject = encodeURIComponent('Demande partenariat ShakeFresh — ' + nom);
+    bodyPrefix = 'Nom / Salle : ' + nom + '\nEmail : ' + email + '\n\n';
+  } else {
+    subject = encodeURIComponent('ShakeFresh partnership request — ' + nom);
+    bodyPrefix = 'Name / Gym: ' + nom + '\nEmail: ' + email + '\n\n';
+  }
+  var body = encodeURIComponent(bodyPrefix + msg);
+  var a = document.createElement('a');
   a.href = 'mailto:contact@shakefresh.fr?subject=' + subject + '&body=' + body;
   a.target = '_blank';
   document.body.appendChild(a);
@@ -734,301 +1595,51 @@ document.getElementById('contactForm').addEventListener('submit', function(e){
 });
 
 // ── CONFIGURATOR ──
-(function(){
-  let chosenProtein = null;
-  const chosenSupps = new Set();
+(function() {
+  var chosenProtein = null;
+  var chosenSupps = new Set();
 
-  document.querySelectorAll('.cpill').forEach(pill => {
-    pill.addEventListener('click', function(){
-      const group = this.dataset.group;
-      const name = this.dataset.name;
+  document.querySelectorAll('.cpill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      var group = this.dataset.group;
+      var name = this.dataset.name;
 
-      if(group === 'protein'){
-        // radio: deselect previous
-        document.querySelectorAll('.cpill[data-group="protein"]').forEach(p => p.classList.remove('active'));
-        if(chosenProtein === name){ chosenProtein = null; }
-        else { this.classList.add('active'); chosenProtein = name; }
+      if (group === 'protein') {
+        document.querySelectorAll('.cpill[data-group="protein"]').forEach(function(p) {
+          p.classList.remove('active');
+        });
+        if (chosenProtein === name) {
+          chosenProtein = null;
+        } else {
+          this.classList.add('active');
+          chosenProtein = name;
+        }
       } else {
-        // checkbox
-        if(chosenSupps.has(name)){ chosenSupps.delete(name); this.classList.remove('active'); }
-        else { chosenSupps.add(name); this.classList.add('active'); }
+        if (chosenSupps.has(name)) {
+          chosenSupps.delete(name);
+          this.classList.remove('active');
+        } else {
+          chosenSupps.add(name);
+          this.classList.add('active');
+        }
       }
       updateResult();
     });
   });
 
-  function updateResult(){
-    const res = document.getElementById('configResult');
-    const txt = document.getElementById('configText');
-    if(!chosenProtein && chosenSupps.size === 0){ res.classList.remove('show'); return; }
+  function updateResult() {
+    var res = document.getElementById('configResult');
+    var txt = document.getElementById('configText');
+    if (!chosenProtein && chosenSupps.size === 0) {
+      res.classList.remove('show');
+      return;
+    }
     res.classList.add('show');
-    let parts = [];
-    if(chosenProtein) parts.push('<span>' + chosenProtein + '</span>');
-    chosenSupps.forEach(s => parts.push('<span>' + s + '</span>'));
+    var parts = [];
+    if (chosenProtein) parts.push('<span>' + chosenProtein + '</span>');
+    chosenSupps.forEach(function(s) { parts.push('<span>' + s + '</span>'); });
     txt.innerHTML = '🥤 ' + parts.join(' + ');
   }
-})();
-
-// Duplicate ticker content for seamless loop
-const ticker = document.getElementById('ticker');
-ticker.innerHTML += ticker.innerHTML;
-
-// ── GYM CREW ──
-(function(){
-  const canvas = document.getElementById('runnerCanvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const G  = '#8ECC2A';
-  const G6 = 'rgba(142,204,42,0.6)';
-  const G3 = 'rgba(142,204,42,0.22)';
-  const G1 = 'rgba(142,204,42,0.10)';
-  let frame = 0;
-
-  function resize(){ canvas.width = canvas.offsetWidth; canvas.height = 140; }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function seg(x1,y1,x2,y2){ ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); }
-  function dot(x,y,r){ ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); }
-  function ring(x,y,r){ ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.stroke(); }
-  function glow(x,y){ const g=ctx.createRadialGradient(x,y,0,x,y,18); g.addColorStop(0,'rgba(142,204,42,0.2)'); g.addColorStop(1,'transparent'); ctx.fillStyle=g; dot(x,y,18); }
-
-  // ── 1. BOXER ──
-  function boxer(cx,f){
-    const p=(Math.sin(f*0.07)+1)/2;
-    const bob=Math.sin(f*0.14)*2;
-    const GY=128, hy=GY-66+bob, sy=hy+14, wy=GY-30;
-    ctx.save(); ctx.lineCap='round'; ctx.lineJoin='round';
-    glow(cx,hy); ctx.fillStyle=G; dot(cx,hy,8);
-    ctx.strokeStyle=G6; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.arc(cx,hy,8,Math.PI*0.7,Math.PI*2.3); ctx.stroke();
-    ctx.strokeStyle=G; ctx.lineWidth=5; seg(cx,hy+8,cx,wy);
-    ctx.strokeStyle=G; ctx.lineWidth=3; seg(cx-7,sy,cx+7,sy);
-    const lElbX=cx-12, lElbY=sy+5, lHndX=cx-4, lHndY=sy-5;
-    ctx.strokeStyle=G6; ctx.lineWidth=4;
-    seg(cx-6,sy,lElbX,lElbY); seg(lElbX,lElbY,lHndX,lHndY);
-    ctx.fillStyle=G6; dot(lHndX,lHndY,7);
-    ctx.strokeStyle='rgba(0,0,0,0.25)'; ctx.lineWidth=1; ring(lHndX,lHndY,7);
-    const jElbX=cx+11, jElbY=sy+4;
-    const jHndX=cx+14+p*18, jHndY=sy+2-p*8;
-    ctx.strokeStyle=G; ctx.lineWidth=5;
-    seg(cx+6,sy,jElbX,jElbY); seg(jElbX,jElbY,jHndX,jHndY);
-    ctx.fillStyle=G; dot(jHndX,jHndY,8);
-    ctx.strokeStyle='rgba(0,0,0,0.3)'; ctx.lineWidth=1.5; ring(jHndX,jHndY,8);
-    ctx.save(); ctx.translate(jHndX,jHndY);
-    ctx.rotate(Math.atan2(jHndY-jElbY,jHndX-jElbX)+Math.PI/2);
-    seg(-5,0,5,0); ctx.restore();
-    const lKX=cx-9, lKY=wy+20, rKX=cx+9, rKY=wy+18;
-    ctx.strokeStyle=G; ctx.lineWidth=5;
-    seg(cx,wy,lKX,lKY); seg(lKX,lKY,cx-8,GY-1); seg(cx-8,GY-1,cx-15,GY-1);
-    ctx.strokeStyle=G6; ctx.lineWidth=4;
-    seg(cx,wy,rKX,rKY); seg(rKX,rKY,cx+8,GY-1); seg(cx+8,GY-1,cx+15,GY-1);
-    ctx.restore();
-  }
-
-  // ── 2. TREADMILL ──
-  function treadmill(cx,f){
-    const s=Math.sin(f*0.14);
-    const GY=128;
-    ctx.save(); ctx.lineCap='round'; ctx.lineJoin='round';
-    const bY=GY-10, bL=cx-22, bR=cx+22;
-    ctx.fillStyle='rgba(142,204,42,0.07)'; ctx.fillRect(bL,bY,bR-bL,10);
-    ctx.strokeStyle=G3; ctx.lineWidth=3; ctx.strokeRect(bL,bY,bR-bL,10);
-    const off=(f*3)%14;
-    ctx.strokeStyle=G1; ctx.lineWidth=1;
-    for(let x=bL+off;x<bR-2;x+=14) seg(x,bY+2,x,bY+7);
-    ctx.strokeStyle=G6; ctx.lineWidth=2; ring(bL+5,bY+5,4); ring(bR-5,bY+5,4);
-    const consTop=GY-90;
-    const cLX=cx-12, cRX=cx+12;
-    ctx.strokeStyle=G3; ctx.lineWidth=4;
-    seg(bL+6,bY,cLX,consTop+20); seg(bR-6,bY,cRX,consTop+20);
-    ctx.strokeStyle=G6; ctx.lineWidth=3; seg(cLX-2,GY-52,cRX+2,GY-52);
-    ctx.fillStyle='rgba(142,204,42,0.12)'; ctx.fillRect(cLX-4,consTop,cRX-cLX+8,20);
-    ctx.strokeStyle=G; ctx.lineWidth=1.5; ctx.strokeRect(cLX-4,consTop,cRX-cLX+8,20);
-    ctx.fillStyle=G; ctx.font='bold 7px monospace'; ctx.textAlign='center';
-    ctx.fillText('SF',cx,consTop+12);
-    ctx.strokeStyle=G3; ctx.lineWidth=1; seg(cLX-1,consTop+16,cRX+1,consTop+16);
-    ctx.fillStyle=Math.floor(f*0.1)%2===0?G:G3; dot(cRX+2,consTop+4,2);
-    const legS=s*15, armS=-s*10, bob=Math.abs(s)*2;
-    const footY=bY-1;
-    const hy=footY-58-bob, sy=hy+13, hipY=footY-20;
-    glow(cx,hy); ctx.fillStyle=G; dot(cx,hy,7);
-    ctx.strokeStyle=G; ctx.lineWidth=5; seg(cx,hy+7,cx+2,hipY);
-    ctx.strokeStyle=G; ctx.lineWidth=3; seg(cx-5,sy,cx+5,sy);
-    const lAElbX=cx-7+armS*0.3, lAElbY=sy+8;
-    const lAHndX=cx-3-armS*0.5, lAHndY=sy-4-armS*0.3;
-    ctx.strokeStyle=G; ctx.lineWidth=4;
-    seg(cx-4,sy,lAElbX,lAElbY); seg(lAElbX,lAElbY,lAHndX,lAHndY);
-    const rAElbX=cx+7-armS*0.3, rAElbY=sy+8;
-    const rAHndX=cx+3+armS*0.5, rAHndY=sy-4+armS*0.3;
-    ctx.strokeStyle=G6; ctx.lineWidth=3;
-    seg(cx+4,sy,rAElbX,rAElbY); seg(rAElbX,rAElbY,rAHndX,rAHndY);
-    const rKX=cx+3+legS*0.35, rKY=hipY+14-Math.abs(legS)*0.15;
-    const rFX=cx+legS, rFY=footY;
-    ctx.strokeStyle=G; ctx.lineWidth=5;
-    seg(cx+2,hipY,rKX,rKY); seg(rKX,rKY,rFX,rFY); seg(rFX,rFY,rFX+6,rFY);
-    const lKX=cx-3-legS*0.35, lKY=hipY+12-Math.abs(legS)*0.1;
-    const lFX=cx-legS*0.75, lFY=footY-5;
-    ctx.strokeStyle=G6; ctx.lineWidth=4;
-    seg(cx+2,hipY,lKX,lKY); seg(lKX,lKY,lFX,lFY);
-    ctx.textAlign='left';
-    ctx.restore();
-  }
-
-  // ── 3. BENCH PRESS ──
-  function bench(cx,f){
-    const p=(Math.sin(f*0.05)+1)/2;
-    const BY=116, bodyY=BY-8;
-    const barY=bodyY-10-p*26;
-    ctx.save(); ctx.lineCap='round'; ctx.lineJoin='round';
-    ctx.strokeStyle=G3; ctx.lineWidth=3;
-    seg(cx-22,BY,cx-22,BY+14); seg(cx+22,BY,cx+22,BY+14);
-    ctx.strokeStyle=G1; ctx.lineWidth=2; seg(cx-22,BY+8,cx+22,BY+8);
-    ctx.fillStyle='rgba(142,204,42,0.10)'; ctx.fillRect(cx-28,BY-7,56,7);
-    ctx.strokeStyle=G3; ctx.lineWidth=2; ctx.strokeRect(cx-28,BY-7,56,7);
-    ctx.strokeStyle=G1; ctx.lineWidth=1;
-    seg(cx-14,BY-7,cx-14,BY); seg(cx,BY-7,cx,BY); seg(cx+14,BY-7,cx+14,BY);
-    ctx.strokeStyle=G3; ctx.lineWidth=4;
-    seg(cx-5,BY,cx-5,BY-58); seg(cx+5,BY,cx+5,BY-58);
-    ctx.strokeStyle=G3; ctx.lineWidth=3; seg(cx-10,BY-55,cx+10,BY-55);
-    ctx.strokeStyle=G6; ctx.lineWidth=2;
-    seg(cx-9,BY-22,cx-5,BY-22); seg(cx+5,BY-22,cx+9,BY-22);
-    ctx.strokeStyle=G6; ctx.lineWidth=1.5;
-    seg(cx-9,BY-22,cx-9,BY-19); seg(cx+9,BY-22,cx+9,BY-19);
-    ctx.strokeStyle=G; ctx.lineWidth=3; seg(cx-20,barY,cx+20,barY);
-    ctx.fillStyle='rgba(142,204,42,0.22)'; dot(cx-17,barY,8);
-    ctx.strokeStyle=G; ctx.lineWidth=2; ring(cx-17,barY,8);
-    ctx.fillStyle='rgba(142,204,42,0.08)'; dot(cx-17,barY,5);
-    ctx.strokeStyle=G3; ctx.lineWidth=1; ring(cx-17,barY,5);
-    ctx.fillStyle='rgba(0,0,0,0.4)'; dot(cx-17,barY,2);
-    ctx.fillStyle='rgba(142,204,42,0.22)'; dot(cx+17,barY,8);
-    ctx.strokeStyle=G; ctx.lineWidth=2; ring(cx+17,barY,8);
-    ctx.fillStyle='rgba(142,204,42,0.08)'; dot(cx+17,barY,5);
-    ctx.strokeStyle=G3; ctx.lineWidth=1; ring(cx+17,barY,5);
-    ctx.fillStyle='rgba(0,0,0,0.4)'; dot(cx+17,barY,2);
-    const headX=cx-28, headY=bodyY-3;
-    glow(headX,headY); ctx.fillStyle=G; dot(headX,headY,8);
-    ctx.strokeStyle=G; ctx.lineWidth=5; seg(cx-24,bodyY,cx+12,bodyY);
-    const shX=cx-10, shY=bodyY;
-    const elbX=shX+2, elbY=shY-(8+p*10);
-    ctx.strokeStyle=G; ctx.lineWidth=5;
-    seg(shX,shY,elbX,elbY); seg(elbX,elbY,cx-2,barY);
-    ctx.strokeStyle=G6; ctx.lineWidth=4;
-    seg(shX-4,shY,shX-5,shY-(6+p*8)); seg(shX-5,shY-(6+p*8),shX-3,barY);
-    ctx.strokeStyle=G; ctx.lineWidth=5;
-    seg(cx+8,bodyY,cx+14,bodyY+14); seg(cx+14,bodyY+14,cx+10,BY+14);
-    ctx.strokeStyle=G6; ctx.lineWidth=4;
-    seg(cx+11,bodyY,cx+18,bodyY+12); seg(cx+18,bodyY+12,cx+22,BY+14);
-    ctx.restore();
-  }
-
-  // ── 4. AT THE SHAKEFRESH MACHINE ──
-  function atMachine(cx,f){
-    const p=(Math.sin(f*0.06)+1)/2;
-    const GY=128, mX=cx+8, mW=40, mTop=GY-100;
-    const px=cx-14, hy=GY-66, sy=hy+14, wy=hy+34;
-    ctx.save(); ctx.lineCap='round'; ctx.lineJoin='round';
-    ctx.fillStyle='rgba(142,204,42,0.06)'; ctx.fillRect(mX,mTop,mW,GY-mTop-1);
-    ctx.strokeStyle=G6; ctx.lineWidth=3; ctx.strokeRect(mX,mTop,mW,GY-mTop-1);
-    ctx.strokeStyle=G; ctx.lineWidth=2; seg(mX+2,mTop+2,mX+mW-2,mTop+2);
-    ctx.fillStyle='rgba(142,204,42,0.12)'; ctx.fillRect(mX+3,mTop+5,mW-6,18);
-    ctx.strokeStyle=G; ctx.lineWidth=1.5; ctx.strokeRect(mX+3,mTop+5,mW-6,18);
-    const sg=ctx.createRadialGradient(mX+mW/2,mTop+14,0,mX+mW/2,mTop+14,10);
-    sg.addColorStop(0,'rgba(142,204,42,0.15)'); sg.addColorStop(1,'transparent');
-    ctx.fillStyle=sg; ctx.fillRect(mX+3,mTop+5,mW-6,18);
-    ctx.fillStyle=G; ctx.font='bold 8px monospace'; ctx.textAlign='center';
-    ctx.fillText('SF',mX+mW/2,mTop+16);
-    ctx.strokeStyle=G3; ctx.lineWidth=1;
-    seg(mX+6,mTop+20,mX+mW-6,mTop+20);
-    const ledOn=Math.floor(f*0.1)%4!==0;
-    ctx.fillStyle=ledOn?G:G3; dot(mX+mW-5,mTop+58,3);
-    ctx.strokeStyle=ledOn?'rgba(142,204,42,0.4)':G3; ctx.lineWidth=1; ring(mX+mW-5,mTop+58,5);
-    ctx.strokeStyle=G3; ctx.lineWidth=2; ctx.strokeRect(mX+4,GY-52,mW-8,10);
-    ctx.strokeStyle=G1; ctx.lineWidth=1; seg(mX+6,GY-56,mX+mW-6,GY-56);
-    if(p>0.55){
-      const cupA=(p-0.55)/0.45;
-      ctx.strokeStyle=`rgba(142,204,42,${0.4+cupA*0.6})`; ctx.lineWidth=2;
-      ctx.beginPath();
-      ctx.moveTo(mX+mW/2-4,GY-50);
-      ctx.lineTo(mX+mW/2-3,GY-44);
-      ctx.lineTo(mX+mW/2+3,GY-44);
-      ctx.lineTo(mX+mW/2+4,GY-50);
-      ctx.stroke();
-      ctx.fillStyle=`rgba(142,204,42,${cupA*0.5})`;
-      ctx.fillRect(mX+mW/2-3,GY-47,6,4);
-    }
-    glow(px,hy); ctx.fillStyle=G; dot(px,hy,8);
-    ctx.strokeStyle=G; ctx.lineWidth=5; seg(px,hy+8,px,wy);
-    ctx.strokeStyle=G; ctx.lineWidth=3; seg(px-6,sy,px+6,sy);
-    const btnTargX=mX+10, btnTargY=GY-50;
-    const reach=5+p*9;
-    const rElbX=px+10+reach*0.15, rElbY=sy+8;
-    ctx.strokeStyle=G; ctx.lineWidth=4;
-    seg(px+5,sy,rElbX,rElbY); seg(rElbX,rElbY,btnTargX,btnTargY);
-    ctx.fillStyle=G; dot(btnTargX,btnTargY,3);
-    const lElbX=px-10, lElbY=sy+14;
-    ctx.strokeStyle=G6; ctx.lineWidth=3;
-    seg(px-5,sy,lElbX,lElbY); seg(lElbX,lElbY,px-7,sy+26);
-    ctx.strokeStyle=G; ctx.lineWidth=5;
-    seg(px,wy,px+5,wy+18); seg(px+5,wy+18,px+4,GY-1); seg(px+4,GY-1,px+10,GY-1);
-    ctx.strokeStyle=G6; ctx.lineWidth=4;
-    seg(px,wy,px-5,wy+18); seg(px-5,wy+18,px-4,GY-1); seg(px-4,GY-1,px-10,GY-1);
-    ctx.textAlign='left';
-    ctx.restore();
-  }
-
-  // ── 5. DRINKING ──
-  function drinking(cx,f){
-    const d=(Math.sin(f*0.045)+1)/2;
-    const GY=128, hy=GY-66, sy=hy+14, wy=GY-28;
-    ctx.save(); ctx.lineCap='round'; ctx.lineJoin='round';
-    glow(cx,hy); ctx.fillStyle=G; dot(cx,hy,8);
-    ctx.strokeStyle=G; ctx.lineWidth=5; seg(cx,hy+8,cx,wy);
-    const lElbX=cx-10, lElbY=sy+12;
-    ctx.strokeStyle=G6; ctx.lineWidth=3;
-    seg(cx-3,sy,lElbX,lElbY); seg(lElbX,lElbY,cx-8,sy+24);
-    const rElbX=cx+18, rElbY=sy+8-d*4;
-    const rHndX=cx+22-d*6, rHndY=sy+20-d*12;
-    ctx.strokeStyle=G; ctx.lineWidth=4;
-    seg(cx+3,sy,rElbX,rElbY); seg(rElbX,rElbY,rHndX,rHndY);
-    const mthX=cx+6, mthY=hy+2;
-    const dx2=mthX-rHndX, dy2=mthY-rHndY;
-    const dlen=Math.sqrt(dx2*dx2+dy2*dy2)||1;
-    const ndx=dx2/dlen, ndy=dy2/dlen;
-    const bEndX=rHndX+ndx*13, bEndY=rHndY+ndy*13;
-    ctx.strokeStyle=G; ctx.lineWidth=6; ctx.lineCap='round';
-    ctx.beginPath(); ctx.moveTo(rHndX,rHndY); ctx.lineTo(bEndX,bEndY); ctx.stroke();
-    const midX=rHndX+ndx*6, midY=rHndY+ndy*6;
-    ctx.strokeStyle='rgba(0,0,0,0.15)'; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(midX-ndy*2,midY+ndx*2); ctx.lineTo(midX+ndy*2,midY-ndx*2); ctx.stroke();
-    const nEndX=bEndX+ndx*3, nEndY=bEndY+ndy*3;
-    ctx.strokeStyle=G; ctx.lineWidth=4; ctx.lineCap='round';
-    ctx.beginPath(); ctx.moveTo(bEndX,bEndY); ctx.lineTo(nEndX,nEndY); ctx.stroke();
-    const cEndX=nEndX+ndx*5, cEndY=nEndY+ndy*5;
-    ctx.strokeStyle=G6; ctx.lineWidth=5; ctx.lineCap='round';
-    ctx.beginPath(); ctx.moveTo(nEndX,nEndY); ctx.lineTo(cEndX,cEndY); ctx.stroke();
-    ctx.fillStyle=G; dot(cEndX,cEndY,2);
-    ctx.lineCap='round';
-    const rKX=cx+7, rKY=wy+18, lKX=cx-5, lKY=wy+16;
-    ctx.strokeStyle=G; ctx.lineWidth=5;
-    seg(cx,wy,rKX,rKY); seg(rKX,rKY,cx+6,GY-1); seg(cx+6,GY-1,cx+13,GY-1);
-    ctx.strokeStyle=G6; ctx.lineWidth=4;
-    seg(cx,wy,lKX,lKY); seg(lKX,lKY,cx-4,GY-1); seg(cx-4,GY-1,cx-10,GY-1);
-    ctx.restore();
-  }
-
-  function loop(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    frame++;
-    const sp=canvas.width/6;
-    boxer(sp,          frame);
-    treadmill(sp*2,    frame+20);
-    bench(sp*3,        frame+38);
-    atMachine(sp*4,    frame+14);
-    drinking(sp*5,     frame+29);
-    requestAnimationFrame(loop);
-  }
-  loop();
 })();
 </script>
 
