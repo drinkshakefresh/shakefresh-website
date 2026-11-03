@@ -36,8 +36,8 @@ body{
 /* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:center;
-  padding:0 max(28px,env(safe-area-inset-left,0px));
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 max(20px,env(safe-area-inset-left,0px));
   height:64px;
   background:rgba(6,6,6,0.88);
   backdrop-filter:blur(16px);
@@ -49,15 +49,27 @@ nav{
   letter-spacing:0.14em;text-transform:uppercase;
   color:var(--white);
   font-style:italic;
+  text-decoration:none;
+  position:absolute;left:50%;transform:translateX(-50%);
+  pointer-events:auto;
 }
 .nav-wordmark .nav-fresh{color:#8ECC2A!important;}
+.nav-left,.nav-right{display:flex;align-items:center;gap:4px;z-index:1;}
+.nav-link{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.42);
+  text-decoration:none;
+  padding:6px 8px;
+  transition:color .15s;
+  white-space:nowrap;
+  line-height:1;
+}
+.nav-link:hover{color:var(--green);}
 
 /* ── LANG SWITCH ── */
-.lang-switch{
-  position:absolute;
-  right:max(28px,env(safe-area-inset-right,0px));
-  display:flex;align-items:center;gap:4px;
-}
+.lang-switch{display:flex;align-items:center;gap:4px;}
 .lang-btn{
   background:none;border:none;cursor:pointer;
   font-family:'Barlow Condensed',sans-serif;
@@ -71,19 +83,53 @@ nav{
 .lang-btn.active{color:var(--green);}
 .lang-btn:hover:not(.active){color:rgba(255,255,255,0.7);}
 .lang-sep{color:rgba(255,255,255,0.15);font-size:11px;font-family:'Barlow Condensed',sans-serif;line-height:1;}
-.nav-membre{
-  position:absolute;
-  left:max(28px,env(safe-area-inset-left,0px));
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:12px;font-weight:700;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:rgba(255,255,255,0.45);
-  text-decoration:none;
-  padding:6px 0;
-  transition:color .15s;
-  line-height:1;
+
+/* ── HAMBURGER (mobile) ── */
+.nav-burger{
+  display:none;
+  background:none;border:none;cursor:pointer;
+  flex-direction:column;justify-content:center;align-items:center;
+  gap:5px;padding:8px;
 }
-.nav-membre:hover{color:var(--green);}
+.nav-burger span{
+  display:block;width:22px;height:2px;
+  background:rgba(255,255,255,0.6);
+  transition:all .25s;border-radius:2px;
+}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ── MOBILE MENU ── */
+.nav-mobile{
+  display:none;
+  position:fixed;top:64px;left:0;right:0;z-index:199;
+  background:rgba(6,6,6,0.97);
+  border-bottom:1px solid rgba(142,204,42,0.12);
+  flex-direction:column;
+  padding:8px 0 20px;
+}
+.nav-mobile.open{display:flex;}
+.nav-mobile-link{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.55);
+  text-decoration:none;
+  padding:14px max(20px,env(safe-area-inset-left,0px));
+  transition:color .15s;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.nav-mobile-link:first-child{border-top:none;}
+.nav-mobile-link:hover{color:var(--green);}
+.nav-mobile .lang-switch{
+  padding:14px max(20px,env(safe-area-inset-left,0px));
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+@media(max-width:640px){
+  .nav-left,.nav-right .nav-link{display:none;}
+  .nav-burger{display:flex;}
+}
 
 
 /* ── HERO ── */
@@ -826,6 +872,57 @@ input[type=range].sim-slider::-webkit-slider-thumb:hover{
 .contact-form textarea{resize:vertical;min-height:100px;}
 .form-sent{display:none;text-align:center;padding:16px;border-radius:6px;background:rgba(142,204,42,0.12);border:1px solid rgba(142,204,42,0.3);color:var(--green);font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;font-size:14px;}
 
+/* ── ESPACES ── */
+.espaces-section{
+  padding:100px max(28px,env(safe-area-inset-left,0px)) 80px;
+  text-align:center;
+  max-width:900px;
+  margin:0 auto;
+}
+.espaces-map-wrap{
+  margin:40px auto 0;
+  max-width:800px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(142,204,42,0.15);
+  position:relative;
+}
+.espaces-map-wrap iframe{
+  width:100%;height:400px;border:none;display:block;
+  filter:grayscale(1) brightness(0.7) invert(1) sepia(0.2) hue-rotate(70deg);
+}
+.espaces-coming{
+  margin:28px auto 0;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:14px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.espaces-dot{
+  width:7px;height:7px;
+  background:var(--green);border-radius:50%;
+  flex-shrink:0;
+  box-shadow:0 0 6px rgba(142,204,42,0.6);
+  animation:pulse 2s ease-in-out infinite;
+}
+.espaces-cta-wrap{margin-top:32px;}
+.espaces-cta-wrap a{
+  display:inline-block;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:800;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--green);
+  text-decoration:none;
+  border:1px solid rgba(142,204,42,0.4);
+  padding:12px 24px;border-radius:6px;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.espaces-cta-wrap a:hover{
+  background:rgba(142,204,42,0.1);
+  border-color:rgba(142,204,42,0.7);
+}
+
 /* ── FOOTER ── */
 footer{
   background:#000;
@@ -936,14 +1033,33 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <a class="nav-membre" href="#" data-i18n="nav-membre">Espace membre</a>
-  <span class="nav-wordmark">SHAKE<span class="nav-fresh">FRESH</span></span>
+  <div class="nav-left">
+    <a class="nav-link" href="membres/" data-i18n="nav-membre">Espace membre</a>
+    <a class="nav-link" href="la-machine/" data-i18n="nav-machine">La Machine</a>
+    <a class="nav-link" href="#espaces" data-i18n="nav-espaces">Nos Espaces</a>
+  </div>
+  <a class="nav-wordmark" href="#">SHAKE<span class="nav-fresh">FRESH</span></a>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="fr">FR</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+  <button class="nav-burger" id="navBurger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a class="nav-mobile-link" href="la-machine/" data-i18n="nav-machine">La Machine</a>
+  <a class="nav-mobile-link" href="#espaces" data-i18n="nav-espaces">Nos Espaces</a>
+  <a class="nav-mobile-link" href="membres/" data-i18n="nav-membre">Espace membre</a>
   <div class="lang-switch">
-    <button class="lang-btn active" data-lang="fr">FR</button>
+    <button class="lang-btn" data-lang="fr">FR</button>
     <span class="lang-sep">|</span>
     <button class="lang-btn" data-lang="en">EN</button>
   </div>
-</nav>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -1052,7 +1168,7 @@ footer{
 
 
   <!-- MACHINE SPECS -->
-  <section class="machine-section reveal">
+  <section class="machine-section reveal" id="machine">
     <p class="machine-eyebrow" data-i18n="machine-eyebrow">La machine</p>
     <h2 class="machine-h2" data-i18n-html="machine-h2">Sous le <span class="hl">capot</span></h2>
     <div class="machine-body">
@@ -1265,6 +1381,27 @@ footer{
   </div>
 </section>
 
+<!-- ESPACES -->
+<section class="espaces-section reveal" id="espaces">
+  <span class="eyebrow" data-i18n="espaces-eyebrow">Nos Espaces</span>
+  <h2 class="section-h2" data-i18n-html="espaces-h2">Où nous <span class="hl">trouver</span></h2>
+  <p class="section-lead" style="margin:12px auto 0;text-align:center;max-width:500px;" data-i18n="espaces-lead">Les premiers espaces ShakeFresh sont à Paris. De nouveaux emplacements arrivent bientôt.</p>
+  <div class="espaces-map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d83997.80296858725!2d2.3522219!3d48.8566101!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1699000000000!5m2!1sfr!2sfr"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="ShakeFresh Paris">
+    </iframe>
+  </div>
+  <p class="espaces-coming">
+    <span class="espaces-dot"></span>
+    <span data-i18n="espaces-coming">Paris · Nouveaux emplacements bientôt annoncés</span>
+  </p>
+  <div class="espaces-cta-wrap">
+    <a href="#contact" data-i18n="espaces-cta">Proposer mon espace</a>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <span style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;background:linear-gradient(90deg,rgba(255,255,255,0.4) 0%,rgba(200,232,122,0.6) 50%,rgba(142,204,42,0.8) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">SHAKE. SIP. GO.</span>
@@ -1279,6 +1416,13 @@ const T = {
   fr: {
     'hero-tagline': `La nutrition instantanée en salle`,
     'nav-membre': `Espace membre`,
+    'nav-machine': `La Machine`,
+    'nav-espaces': `Nos Espaces`,
+    'espaces-eyebrow': `Nos Espaces`,
+    'espaces-h2': `Où nous <span class="hl">trouver</span>`,
+    'espaces-lead': `Les premiers espaces ShakeFresh sont à Paris. De nouveaux emplacements arrivent bientôt.`,
+    'espaces-coming': `Paris · Nouveaux emplacements bientôt annoncés`,
+    'espaces-cta': `Proposer mon espace`,
     'hero-h1': `<span class="block">Ton shake,</span><span class="block"><span class="hl">en 60 secondes<sup>*</sup></span></span>`,
     'hero-sub': `Jusqu'à 7 références sur mesure — protéines, suppléments & option vegan. Le catalogue s'adapte à ta salle et tes adhérents. Revenus additionnels garantis.`,
     'btn-main': `Devenir partenaire`,
@@ -1370,8 +1514,14 @@ const T = {
   },
   en: {
     'hero-tagline': `Instant nutrition at your gym`,
-    'nav-membre': `Espace membre`,
     'nav-membre': `Member area`,
+    'nav-machine': `The Machine`,
+    'nav-espaces': `Our Spaces`,
+    'espaces-eyebrow': `Our Spaces`,
+    'espaces-h2': `Where to <span class="hl">find us</span>`,
+    'espaces-lead': `First ShakeFresh locations are in Paris. New spaces coming soon.`,
+    'espaces-coming': `Paris · Next locations coming soon`,
+    'espaces-cta': `Suggest my space`,
     'hero-h1': `<span class="block">Your shake,</span><span class="block"><span class="hl">in 60 seconds<sup>*</sup></span></span>`,
     'hero-sub': `Up to 7 custom options — proteins, supplements & vegan option. The catalog adapts to your gym and your members. Guaranteed additional revenue.`,
     'btn-main': `Become a partner`,
@@ -1565,6 +1715,24 @@ document.querySelectorAll('.lang-btn').forEach(function(btn) {
     setLang(this.dataset.lang);
   });
 });
+
+// ── HAMBURGER MENU ──
+(function(){
+  var burger = document.getElementById('navBurger');
+  var mobile = document.getElementById('navMobile');
+  if (!burger || !mobile) return;
+  burger.addEventListener('click', function() {
+    var open = mobile.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  mobile.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      mobile.classList.remove('open');
+      burger.classList.remove('open');
+    });
+  });
+})();
 
 // ── INIT ──
 setLang('fr');
