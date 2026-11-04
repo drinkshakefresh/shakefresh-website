@@ -3,13 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ShakeFresh Membres</title>
-<meta name="description" content="Espace membres ShakeFresh — suivez vos points fidélité et débloquez vos avantages.">
+<title>Espace Membre — ShakeFresh</title>
+<meta name="description" content="Connectez-vous à votre espace membre ShakeFresh — suivez vos points fidélité et débloquez vos avantages.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Barlow+Condensed:ital,wght@1,900&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
 <style>
-:root {
+:root{
   --g: #8ECC2A;
   --g2: #6fa820;
   --g3: rgba(142,204,42,0.18);
@@ -24,568 +23,399 @@
   --err: #ff5555;
   color-scheme: dark;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: 'Inter', sans-serif;
-  min-height: 100dvh;
-  max-width: 430px;
-  margin: 0 auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-top: env(safe-area-inset-top, 0px);
+#nl-badge-frame{display:none!important;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:'Inter',system-ui,sans-serif;
+  min-height:100svh;
+  overflow-x:hidden;
+  padding-left:max(0px,env(safe-area-inset-left,0px));
+  padding-right:max(0px,env(safe-area-inset-right,0px));
+  padding-bottom:max(0px,env(safe-area-inset-bottom,0px));
 }
 
-/* ── VIEWS ── */
-.view { display: none; }
-.view.active { display: block; }
-
-/* ── AUTH VIEW ── */
-.auth-wrap {
-  min-height: 100dvh;
-  display: flex; flex-direction: column;
-  padding-bottom: max(24px, env(safe-area-inset-bottom, 0px));
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 max(20px,env(safe-area-inset-left,0px));
+  height:64px;
+  background:rgba(6,6,6,0.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(142,204,42,0.12);
+}
+.nav-wordmark{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:24px;font-weight:900;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:#fff;font-style:italic;
+  text-decoration:none;
+  position:absolute;left:50%;transform:translateX(-50%);
+}
+.nav-wordmark .nav-fresh{color:#8ECC2A!important;}
+.nav-left,.nav-right{display:flex;align-items:center;gap:4px;z-index:1;}
+.nav-link{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.42);
+  text-decoration:none;padding:6px 8px;
+  transition:color .15s;white-space:nowrap;line-height:1;
+}
+.nav-link:hover,.nav-link.active{color:#8ECC2A;}
+.lang-switch{display:flex;align-items:center;gap:4px;}
+.lang-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:800;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);padding:6px 4px;
+  transition:color .15s;line-height:1;
+}
+.lang-btn.active{color:#8ECC2A;}
+.lang-btn:hover:not(.active){color:rgba(255,255,255,0.7);}
+.lang-sep{color:rgba(255,255,255,0.15);font-size:11px;font-family:'Barlow Condensed',sans-serif;line-height:1;}
+.nav-burger{
+  display:none;background:none;border:none;cursor:pointer;
+  flex-direction:column;justify-content:center;align-items:center;
+  gap:5px;padding:8px;
+}
+.nav-burger span{display:block;width:22px;height:2px;background:rgba(255,255,255,0.6);transition:all .25s;border-radius:2px;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile{
+  display:none;position:fixed;top:64px;left:0;right:0;z-index:199;
+  background:rgba(6,6,6,0.97);
+  border-bottom:1px solid rgba(142,204,42,0.12);
+  flex-direction:column;padding:8px 0 20px;
+}
+.nav-mobile.open{display:flex;}
+.nav-mobile-link{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.55);
+  text-decoration:none;
+  padding:14px max(20px,env(safe-area-inset-left,0px));
+  transition:color .15s;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.nav-mobile-link:first-child{border-top:none;}
+.nav-mobile-link:hover,.nav-mobile-link.active{color:#8ECC2A;}
+.nav-mobile .lang-switch{padding:14px max(20px,env(safe-area-inset-left,0px));border-top:1px solid rgba(255,255,255,0.04);}
+@media(max-width:640px){
+  .nav-left,.nav-right .nav-link{display:none;}
+  .nav-burger{display:flex;}
 }
 
-/* HERO */
-.auth-hero {
-  padding: 48px 0 32px;
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  position: relative;
-}
-.auth-hero::before {
-  content: '';
-  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(142,204,42,0.12) 0%, transparent 65%);
-  pointer-events: none; z-index: 0;
-}
-.logo-mark {
-  width: 68px; height: 68px; border-radius: 20px;
-  background: linear-gradient(135deg, #1a2d04, #2a4a08);
-  border: 1.5px solid rgba(142,204,42,0.4);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; z-index: 1;
-  box-shadow: 0 0 32px rgba(142,204,42,0.2);
-}
-.sf-mono {
-  font-family: 'Barlow Condensed','Impact','Arial Narrow',sans-serif;
-  font-size: 38px; font-weight: 900; font-style: italic;
-  letter-spacing: -2px; line-height: 1;
-  display: flex; align-items: baseline;
-}
-.sf-s { color: #fff; }
-.sf-f-w { position: relative; display: inline-block; }
-.sf-f-base { color: #fff; display: block; }
-.sf-f-top {
-  position: absolute; top: 0; left: 0;
-  color: #B9FF00; display: block;
-  clip-path: inset(0 0 70% 0);
-  pointer-events: none;
-}
-.auth-brand { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; position: relative; z-index: 1; }
-.auth-brand span { color: var(--g); }
-.auth-tagline { font-size: 13px; color: var(--fg2); position: relative; z-index: 1; }
-
-/* TAB SWITCHER */
-.auth-tabs {
-  display: flex; background: var(--bg2); border-radius: 14px;
-  padding: 4px; margin-bottom: 24px; border: 1px solid var(--border);
-}
-.auth-tab {
-  flex: 1; padding: 10px; border-radius: 10px;
-  font-size: 14px; font-weight: 700; color: var(--fg3);
-  cursor: pointer; text-align: center;
-  transition: all 0.2s;
-}
-.auth-tab.active {
-  background: var(--bg3); color: var(--fg);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+/* ── PAGE ── */
+.page{
+  min-height:100svh;
+  display:flex;align-items:center;justify-content:center;
+  padding:100px max(20px,env(safe-area-inset-left,0px)) 60px;
 }
 
-/* FORM */
-.auth-form { flex: 1; display: flex; flex-direction: column; gap: 12px; }
-.field-label { font-size: 12px; font-weight: 700; color: var(--fg2); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
-.field-wrap { margin-bottom: 4px; }
-.field {
-  width: 100%; padding: 15px 16px;
-  background: var(--bg2); border: 1.5px solid var(--border);
-  border-radius: 14px; color: var(--fg);
-  font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500;
-  outline: none; transition: border-color 0.2s;
-  -webkit-appearance: none;
+/* ── CARD ── */
+.card{
+  width:100%;max-width:420px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:40px 36px;
+  position:relative;
+  overflow:hidden;
 }
-.field::placeholder { color: var(--fg3); }
-.field:focus { border-color: var(--g); }
-.field.error { border-color: var(--err); }
-
-.btn-auth {
-  width: 100%; padding: 17px;
-  background: var(--g); color: #000;
-  border: none; border-radius: 14px;
-  font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 900;
-  cursor: pointer; letter-spacing: -0.2px;
-  transition: transform 0.15s, opacity 0.15s;
-  margin-top: 8px;
+.card::before{
+  content:'';
+  position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+  width:280px;height:120px;
+  background:radial-gradient(ellipse,rgba(142,204,42,0.12) 0%,transparent 70%);
+  pointer-events:none;
 }
-.btn-auth:active { transform: scale(0.98); opacity: 0.85; }
-
-.err-msg { font-size: 12px; color: var(--err); margin-top: 4px; display: none; }
-.err-msg.show { display: block; }
-
-.auth-footer {
-  text-align: center; font-size: 12px; color: var(--fg3);
-  margin-top: 20px; line-height: 1.6;
-}
-.auth-footer a { color: var(--g); text-decoration: none; font-weight: 600; cursor: pointer; }
-
-.divider {
-  display: flex; align-items: center; gap: 12px;
-  color: var(--fg3); font-size: 12px; margin: 4px 0;
-}
-.divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
-
-/* ── DASHBOARD VIEW ── */
-.dash-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 0 0;
-}
-.dash-greeting { font-size: 14px; color: var(--fg2); }
-.dash-name { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; }
-.dash-name span { color: var(--g); }
-.logout-btn {
-  padding: 8px 14px; background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 10px; font-size: 13px; font-weight: 600; color: var(--fg2);
-  cursor: pointer; white-space: nowrap;
+@media(max-width:480px){
+  .card{padding:32px 24px;border-radius:16px;}
 }
 
-/* Welcome banner */
-.welcome-banner {
-  background: linear-gradient(135deg, #0f1f00, #1a2d04);
-  border: 1px solid rgba(142,204,42,0.3);
-  border-radius: 18px; padding: 18px 20px;
-  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+.card-logo{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:22px;font-weight:900;font-style:italic;
+  letter-spacing:0.14em;text-transform:uppercase;
+  text-align:center;margin-bottom:28px;
+  text-decoration:none;display:block;
 }
-.welcome-icon { font-size: 32px; }
-.welcome-text h3 { font-size: 16px; font-weight: 800; }
-.welcome-text p { font-size: 13px; color: var(--fg2); margin-top: 2px; }
+.card-logo .fresh{color:#8ECC2A;}
 
-/* Points card */
-.points-card {
-  background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 22px; padding: 24px; margin: 20px 0 0;
-  position: relative; overflow: hidden;
+.card-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:28px;font-weight:900;font-style:italic;
+  text-transform:uppercase;letter-spacing:0.04em;
+  text-align:center;margin-bottom:6px;
 }
-.points-card::after {
-  content: '';
-  position: absolute; top: -50px; right: -50px;
-  width: 160px; height: 160px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(142,204,42,0.12) 0%, transparent 70%);
-  pointer-events: none;
+.card-sub{
+  font-size:13px;color:var(--fg3);
+  text-align:center;margin-bottom:32px;line-height:1.5;
 }
-.pts-label { font-size: 11px; font-weight: 700; color: var(--fg2); text-transform: uppercase; letter-spacing: 1px; }
-.pts-val { font-size: 52px; font-weight: 900; letter-spacing: -2px; color: var(--fg); line-height: 1.05; }
-.pts-val em { font-size: 22px; font-weight: 600; color: var(--g); font-style: normal; margin-left: 4px; }
-.pts-level {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: var(--g3); border: 1px solid rgba(142,204,42,0.3);
-  border-radius: 99px; padding: 4px 10px;
-  font-size: 12px; font-weight: 700; color: var(--g); margin-top: 8px;
-}
-.pts-progress { margin-top: 16px; }
-.pts-bar { height: 6px; background: rgba(255,255,255,0.07); border-radius: 99px; overflow: hidden; }
-.pts-bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--g2), var(--g)); transition: width 1s ease; }
-.pts-hint { font-size: 12px; color: var(--fg3); margin-top: 5px; }
 
-/* Stats */
-.stats-row {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 12px; margin: 14px 0 0;
+/* ── FORM ── */
+.form-group{margin-bottom:16px;}
+label{
+  display:block;
+  font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--fg3);margin-bottom:8px;
 }
-.stat-card {
-  background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 16px; padding: 16px;
+input{
+  width:100%;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:var(--fg);
+  font-family:'Inter',sans-serif;
+  font-size:15px;font-weight:500;
+  padding:14px 16px;
+  outline:none;
+  transition:border-color .15s,background .15s;
+  -webkit-appearance:none;
 }
-.stat-icon { font-size: 20px; margin-bottom: 6px; }
-.stat-val { font-size: 22px; font-weight: 900; }
-.stat-label { font-size: 12px; color: var(--fg2); margin-top: 2px; }
+input::placeholder{color:var(--fg3);}
+input:focus{
+  border-color:rgba(142,204,42,0.5);
+  background:#1f1f1f;
+}
+.input-wrap{position:relative;}
+.toggle-pw{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;
+  color:var(--fg3);font-size:18px;line-height:1;
+  transition:color .15s;padding:4px;
+}
+.toggle-pw:hover{color:var(--fg2);}
 
-/* Reward CTA */
-.reward-cta {
-  background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
-  border: 1px solid var(--g);
-  border-radius: 18px; padding: 18px 20px;
-  display: flex; align-items: center; gap: 14px; margin: 14px 0 0;
-  cursor: pointer;
+.btn-submit{
+  width:100%;
+  background:var(--g);
+  color:#000;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;
+  padding:16px;border-radius:10px;
+  border:none;cursor:pointer;
+  margin-top:8px;
+  transition:transform .15s,box-shadow .15s,background .15s;
+  box-shadow:0 4px 20px rgba(142,204,42,0.25);
 }
-.reward-cta:active { opacity: 0.8; }
-.reward-emoji { font-size: 32px; }
-.reward-info { flex: 1; }
-.reward-info h3 { font-size: 15px; font-weight: 800; }
-.reward-info p { font-size: 12px; color: var(--fg2); margin-top: 2px; }
-.reward-arrow { font-size: 20px; color: var(--g); font-weight: 900; }
+.btn-submit:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 28px rgba(142,204,42,0.4);
+}
+.btn-submit:active{transform:translateY(0);}
 
-/* Section */
-.section-title { font-size: 17px; font-weight: 800; margin: 22px 0 12px; }
+.form-footer{
+  margin-top:24px;text-align:center;
+  font-size:12px;color:var(--fg3);line-height:1.6;
+}
+.form-footer a{color:var(--g);text-decoration:none;}
+.form-footer a:hover{text-decoration:underline;}
 
-/* History */
-.hist-item {
-  display: flex; align-items: center; gap: 12px;
-  background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 14px; padding: 13px 14px; margin-bottom: 10px;
+.divider{
+  display:flex;align-items:center;gap:12px;
+  margin:24px 0;
+  color:var(--fg3);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
 }
-.hist-icon {
-  width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; font-size: 17px;
+.divider::before,.divider::after{
+  content:'';flex:1;
+  height:1px;background:var(--border);
 }
-.hist-icon.earn { background: rgba(142,204,42,0.12); }
-.hist-icon.spend { background: rgba(255,85,85,0.1); }
-.hist-info { flex: 1; }
-.hist-name { font-size: 14px; font-weight: 600; }
-.hist-date { font-size: 11px; color: var(--fg3); margin-top: 2px; }
-.hist-pts { font-size: 14px; font-weight: 800; }
-.hist-pts.earn { color: var(--g); }
-.hist-pts.spend { color: #ff5555; }
 
-/* QR info bar */
-.qr-bar {
-  background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 14px; padding: 14px 16px;
-  display: flex; align-items: center; gap: 10px; margin: 14px 0 32px;
+/* ── BENEFITS ── */
+.benefits{
+  display:flex;flex-direction:column;gap:10px;
+  margin-bottom:28px;
 }
-.qr-bar-icon { font-size: 20px; flex-shrink: 0; }
-.qr-bar-text { font-size: 12px; color: var(--fg2); line-height: 1.5; }
-.qr-bar-text strong { color: var(--fg); }
+.benefit{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;color:var(--fg2);line-height:1.4;
+}
+.benefit-dot{
+  flex:0 0 auto;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--g);
+  box-shadow:0 0 6px rgba(142,204,42,0.5);
+}
+
+/* ── FOOTER ── */
+.page-footer{
+  position:fixed;bottom:0;left:0;right:0;
+  padding:16px max(20px,env(safe-area-inset-left,0px));
+  display:flex;align-items:center;justify-content:center;
+  gap:20px;
+  background:rgba(10,10,10,0.8);
+  backdrop-filter:blur(10px);
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.page-footer a{
+  font-size:11px;color:var(--fg3);text-decoration:none;
+  letter-spacing:0.05em;
+  transition:color .15s;
+}
+.page-footer a:hover{color:var(--fg2);}
+.page-footer-sep{color:rgba(255,255,255,0.1);font-size:10px;}
 </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════
-     VIEW 1 — AUTH (login / signup)
-════════════════════════════════ -->
-<div class="view active" id="view-auth">
-  <div class="auth-wrap">
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a class="nav-link active" href="./">Espace membre</a>
+    <a class="nav-link" href="../la-machine/">La Machine</a>
+    <a class="nav-link" href="../#espaces">Nos Espaces</a>
+  </div>
+  <a class="nav-wordmark" href="../">SHAKE<span class="nav-fresh">FRESH</span></a>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="fr">FR</button>
+      <span class="lang-sep">|</span>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+  <button class="nav-burger" id="navBurger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a class="nav-mobile-link active" href="./">Espace membre</a>
+  <a class="nav-mobile-link" href="../la-machine/">La Machine</a>
+  <a class="nav-mobile-link" href="../#espaces">Nos Espaces</a>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="fr">FR</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
+</div>
 
-    <!-- Hero -->
-    <div class="auth-hero">
-      <div class="logo-mark">
-        <div class="sf-mono" aria-label="SF">
-          <span class="sf-s">S</span>
-          <span class="sf-f-w">
-            <span class="sf-f-base">F</span>
-            <span class="sf-f-top" aria-hidden="true">F</span>
-          </span>
+<!-- MAIN -->
+<main class="page">
+  <div class="card">
+    <a class="card-logo" href="../">SHAKE<span class="fresh">FRESH</span></a>
+
+    <h1 class="card-title">Espace Membre</h1>
+    <p class="card-sub">Connectez-vous pour accéder à vos avantages</p>
+
+    <div class="benefits">
+      <div class="benefit">
+        <div class="benefit-dot"></div>
+        Suivi de vos points fidélité
+      </div>
+      <div class="benefit">
+        <div class="benefit-dot"></div>
+        Shakes offerts à chaque palier
+      </div>
+      <div class="benefit">
+        <div class="benefit-dot"></div>
+        Offres exclusives membres
+      </div>
+    </div>
+
+    <form id="loginForm" autocomplete="on">
+      <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="vous@exemple.fr"
+          autocomplete="email"
+          required
+        >
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <div class="input-wrap">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            required
+          >
+          <button type="button" class="toggle-pw" id="togglePw" aria-label="Afficher le mot de passe">👁</button>
         </div>
       </div>
-      <div class="auth-brand">Shake<span>Fresh</span></div>
-      <div class="auth-tagline">Espace Membres — Points & Avantages</div>
-    </div>
+      <button type="submit" class="btn-submit">Se connecter</button>
+    </form>
 
-    <!-- Tabs -->
-    <div class="auth-tabs">
-      <div class="auth-tab active" id="tab-login" onclick="showAuthTab('login')">Se connecter</div>
-      <div class="auth-tab" id="tab-signup" onclick="showAuthTab('signup')">Créer un compte</div>
-    </div>
-
-    <!-- LOGIN FORM -->
-    <div class="auth-form" id="form-login">
-      <div class="field-wrap">
-        <div class="field-label">Email</div>
-        <input class="field" id="login-email" type="email" inputmode="email" placeholder="ton@email.com" autocomplete="email">
-        <div class="err-msg" id="login-email-err">Email invalide</div>
-      </div>
-      <div class="field-wrap">
-        <div class="field-label">Mot de passe</div>
-        <input class="field" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password">
-        <div class="err-msg" id="login-pass-err">Mot de passe incorrect</div>
-      </div>
-      <button class="btn-auth" onclick="doLogin()">Se connecter →</button>
-      <div class="auth-footer">
-        <a onclick="showAuthTab('signup')">Pas encore membre ? Créer un compte</a>
-      </div>
-    </div>
-
-    <!-- SIGNUP FORM -->
-    <div class="auth-form" id="form-signup" style="display:none;">
-      <div class="field-wrap">
-        <div class="field-label">Prénom</div>
-        <input class="field" id="signup-name" type="text" placeholder="Ton prénom" autocomplete="given-name">
-        <div class="err-msg" id="signup-name-err">Champ requis</div>
-      </div>
-      <div class="field-wrap">
-        <div class="field-label">Email</div>
-        <input class="field" id="signup-email" type="email" inputmode="email" placeholder="ton@email.com" autocomplete="email">
-        <div class="err-msg" id="signup-email-err">Email invalide</div>
-      </div>
-      <div class="field-wrap">
-        <div class="field-label">Téléphone</div>
-        <input class="field" id="signup-phone" type="tel" inputmode="tel" placeholder="+33 6 …" autocomplete="tel">
-      </div>
-      <div class="field-wrap">
-        <div class="field-label">Mot de passe</div>
-        <input class="field" id="signup-pass" type="password" placeholder="8 caractères minimum" autocomplete="new-password">
-        <div class="err-msg" id="signup-pass-err">8 caractères minimum</div>
-      </div>
-      <button class="btn-auth" onclick="doSignup()">Créer mon compte →</button>
-      <div class="auth-footer">
-        En créant un compte vous acceptez les <a href="#">CGU</a><br>et la <a href="#">politique de confidentialité</a> ShakeFresh.
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ════════════════════════════════
-     VIEW 2 — DASHBOARD (after login)
-════════════════════════════════ -->
-<div class="view" id="view-dash" style="padding-bottom: max(32px, env(safe-area-inset-bottom, 0px));">
-
-  <!-- Header -->
-  <div class="dash-header">
-    <div>
-      <div class="dash-greeting">Bonjour 👋</div>
-      <div class="dash-name" id="dash-name">Sofiane <span>✓</span></div>
-    </div>
-    <div class="logout-btn" onclick="doLogout()">Déconnexion</div>
-  </div>
-
-  <!-- Welcome (new members only) -->
-  <div class="welcome-banner" id="welcome-banner" style="display:none; margin-top:16px;">
-    <div class="welcome-icon">🎉</div>
-    <div class="welcome-text">
-      <h3>Bienvenue chez ShakeFresh !</h3>
-      <p>Ton compte est créé — scanne en machine et gagne des points à chaque shake.</p>
+    <div class="form-footer">
+      <a href="#">Mot de passe oublié ?</a>
+      <br>
+      Pas encore membre ?&nbsp;<a href="../#contact">Rejoindre ShakeFresh</a>
     </div>
   </div>
+</main>
 
-  <!-- Points card -->
-  <div class="points-card">
-    <div class="pts-label">Mes points</div>
-    <div class="pts-val" id="dash-pts">0 <em>pts</em></div>
-    <div class="pts-level" id="dash-level">🌱 Membre</div>
-    <div class="pts-progress">
-      <div class="pts-bar"><div class="pts-bar-fill" id="pts-bar-fill" style="width:0%"></div></div>
-      <div class="pts-hint" id="pts-hint">0 / 500 pts pour le niveau Bronze</div>
-    </div>
-  </div>
-
-  <!-- Stats -->
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-icon">🥤</div>
-      <div class="stat-val" id="dash-shakes">0</div>
-      <div class="stat-label">Shakes achetés</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon">🎁</div>
-      <div class="stat-val" id="dash-rewards">0</div>
-      <div class="stat-label">Récompenses</div>
-    </div>
-  </div>
-
-  <!-- Next reward CTA -->
-  <div class="reward-cta" id="reward-cta">
-    <div class="reward-emoji">🥤</div>
-    <div class="reward-info">
-      <h3 id="cta-title">1 Shake Gratuit</h3>
-      <p id="cta-sub">Accumule 500 pts pour débloquer</p>
-    </div>
-    <div class="reward-arrow">›</div>
-  </div>
-
-  <!-- History -->
-  <div class="section-title" id="hist-title" style="display:none;">Mes dernières activités</div>
-  <div id="hist-list"></div>
-
-  <!-- QR info -->
-  <div class="qr-bar">
-    <div class="qr-bar-icon">📱</div>
-    <div class="qr-bar-text">
-      <strong>Flashe le QR code en machine</strong><br>
-      Tes points sont crédités automatiquement après chaque achat.
-    </div>
-  </div>
-
-</div>
+<!-- FOOTER -->
+<footer class="page-footer">
+  <a href="../">Accueil</a>
+  <span class="page-footer-sep">·</span>
+  <a href="../la-machine/">La Machine</a>
+  <span class="page-footer-sep">·</span>
+  <a href="../#contact">Contact</a>
+  <span class="page-footer-sep">·</span>
+  <span style="font-size:11px;color:rgba(255,255,255,0.15);">© 2026 ShakeFresh</span>
+</footer>
 
 <script>
-// ── DEMO DATA ──
-const DEMO_USERS = {
-  'sofiane@shakefresh.fr': { pass: 'shakefresh', name: 'Sofiane', pts: 1240, shakes: 38, rewards: 3,
-    history: [
-      { icon: '🥤', type: 'earn', name: 'ShakeFresh Vanille', date: 'Aujourd\'hui · 14h22', pts: '+20 pts' },
-      { icon: '📦', type: 'earn', name: 'Pack 5 Shakes', date: 'Hier · 11h05', pts: '+100 pts' },
-      { icon: '🎁', type: 'spend', name: '1 Shake offert', date: '28 oct. · 09h31', pts: '−500 pts' },
-    ]
-  }
-};
-
-// ── PERSIST session in memory ──
-let session = null;
-try { const s = sessionStorage.getItem('sf_session'); if(s) session = JSON.parse(s); } catch(e){}
-
-if (session) showDash(session, false);
-
-// ── AUTH TABS ──
-function showAuthTab(tab) {
-  document.getElementById('form-login').style.display = tab === 'login' ? 'flex' : 'none';
-  document.getElementById('form-signup').style.display = tab === 'signup' ? 'flex' : 'none';
-  document.getElementById('tab-login').className = 'auth-tab' + (tab==='login'?' active':'');
-  document.getElementById('tab-signup').className = 'auth-tab' + (tab==='signup'?' active':'');
-}
-
-// ── LOGIN ──
-function doLogin() {
-  const email = document.getElementById('login-email').value.trim().toLowerCase();
-  const pass  = document.getElementById('login-pass').value;
-  let ok = true;
-
-  ['login-email','login-pass'].forEach(id => {
-    document.getElementById(id).classList.remove('error');
-    document.getElementById(id+'-err').classList.remove('show');
+// Hamburger
+(function(){
+  var burger = document.getElementById('navBurger');
+  var mobile = document.getElementById('navMobile');
+  if (!burger || !mobile) return;
+  burger.addEventListener('click', function() {
+    var open = mobile.classList.toggle('open');
+    burger.classList.toggle('open', open);
   });
-
-  if (!email.includes('@')) {
-    document.getElementById('login-email').classList.add('error');
-    document.getElementById('login-email-err').classList.add('show');
-    ok = false;
-  }
-
-  const user = DEMO_USERS[email];
-  if (ok && (!user || user.pass !== pass)) {
-    document.getElementById('login-pass').classList.add('error');
-    document.getElementById('login-pass-err').textContent = 'Email ou mot de passe incorrect';
-    document.getElementById('login-pass-err').classList.add('show');
-    ok = false;
-  }
-
-  if (!ok) return;
-
-  const s = { name: user.name, pts: user.pts, shakes: user.shakes, rewards: user.rewards, history: user.history, isNew: false };
-  try { sessionStorage.setItem('sf_session', JSON.stringify(s)); } catch(e){}
-  showDash(s, false);
-}
-
-// ── SIGNUP ──
-function doSignup() {
-  const name  = document.getElementById('signup-name').value.trim();
-  const email = document.getElementById('signup-email').value.trim();
-  const pass  = document.getElementById('signup-pass').value;
-  let ok = true;
-
-  ['signup-name','signup-email','signup-pass'].forEach(id => {
-    document.getElementById(id).classList.remove('error');
-    document.getElementById(id+'-err').classList.remove('show');
+  mobile.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      mobile.classList.remove('open');
+      burger.classList.remove('open');
+    });
   });
+})();
 
-  if (!name) {
-    document.getElementById('signup-name').classList.add('error');
-    document.getElementById('signup-name-err').classList.add('show');
-    ok = false;
-  }
-  if (!email.includes('@')) {
-    document.getElementById('signup-email').classList.add('error');
-    document.getElementById('signup-email-err').classList.add('show');
-    ok = false;
-  }
-  if (pass.length < 8) {
-    document.getElementById('signup-pass').classList.add('error');
-    document.getElementById('signup-pass-err').classList.add('show');
-    ok = false;
-  }
-
-  if (!ok) return;
-
-  const s = { name: name.split(' ')[0], pts: 0, shakes: 0, rewards: 0, history: [], isNew: true };
-  try { sessionStorage.setItem('sf_session', JSON.stringify(s)); } catch(e){}
-  showDash(s, true);
-}
-
-// ── SHOW DASHBOARD ──
-function showDash(s, isNew) {
-  session = s;
-  document.getElementById('view-auth').classList.remove('active');
-  document.getElementById('view-dash').classList.add('active');
-
-  document.getElementById('dash-name').innerHTML = s.name + ' <span style="color:var(--g)">✓</span>';
-
-  if (isNew || s.isNew) document.getElementById('welcome-banner').style.display = 'flex';
-
-  animateNumber('dash-pts', 0, s.pts, 900, v => v.toLocaleString('fr-FR') + ' <em>pts</em>');
-  document.getElementById('dash-shakes').textContent = s.shakes;
-  document.getElementById('dash-rewards').textContent = s.rewards;
-
-  let level, nextPts, nextLabel;
-  if (s.pts < 500)       { level='🌱 Membre';   nextPts=500;  nextLabel='Bronze'; }
-  else if (s.pts < 1000) { level='🥉 Bronze';   nextPts=1000; nextLabel='Silver'; }
-  else if (s.pts < 1500) { level='🥈 Silver';   nextPts=1500; nextLabel='Gold'; }
-  else if (s.pts < 3000) { level='🥇 Gold';     nextPts=3000; nextLabel='Platinum'; }
-  else                   { level='💎 Platinum';  nextPts=3000; nextLabel='Max'; }
-
-  document.getElementById('dash-level').textContent = level;
-
-  const prevMilestone = s.pts < 500 ? 0 : s.pts < 1000 ? 500 : s.pts < 1500 ? 1000 : s.pts < 3000 ? 1500 : 3000;
-  const pct = Math.min(100, Math.round((s.pts - prevMilestone) / (nextPts - prevMilestone) * 100));
-  setTimeout(() => { document.getElementById('pts-bar-fill').style.width = pct + '%'; }, 100);
-  document.getElementById('pts-hint').textContent = s.pts.toLocaleString('fr-FR') + ' / ' + nextPts.toLocaleString('fr-FR') + ' pts pour le niveau ' + nextLabel;
-
-  if (s.pts >= 500) {
-    document.getElementById('cta-title').textContent = '🎉 1 Shake Gratuit disponible !';
-    document.getElementById('cta-sub').textContent = 'Tu as assez de points — présente ce QR code en machine.';
-    document.getElementById('reward-cta').style.borderColor = 'var(--g)';
-  } else {
-    document.getElementById('cta-title').textContent = '1 Shake Gratuit';
-    document.getElementById('cta-sub').textContent = 'Encore ' + (500 - s.pts) + ' pts pour débloquer ta récompense.';
-  }
-
-  if (s.history && s.history.length) {
-    document.getElementById('hist-title').style.display = 'block';
-    const list = document.getElementById('hist-list');
-    list.innerHTML = s.history.map(h => `
-      <div class="hist-item">
-        <div class="hist-icon ${h.type}">${h.icon}</div>
-        <div class="hist-info">
-          <div class="hist-name">${h.name}</div>
-          <div class="hist-date">${h.date}</div>
-        </div>
-        <div class="hist-pts ${h.type}">${h.pts}</div>
-      </div>
-    `).join('');
-  }
-}
-
-// ── LOGOUT ──
-function doLogout() {
-  session = null;
-  try { sessionStorage.removeItem('sf_session'); } catch(e) {}
-  document.getElementById('view-dash').classList.remove('active');
-  document.getElementById('view-auth').classList.add('active');
-  document.getElementById('welcome-banner').style.display = 'none';
-  document.getElementById('hist-title').style.display = 'none';
-  document.getElementById('hist-list').innerHTML = '';
-  ['login-email','login-pass','signup-name','signup-email','signup-phone','signup-pass'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) { el.value=''; el.classList.remove('error'); }
+// Toggle password
+(function(){
+  var btn = document.getElementById('togglePw');
+  var inp = document.getElementById('password');
+  if (!btn || !inp) return;
+  btn.addEventListener('click', function(){
+    var show = inp.type === 'password';
+    inp.type = show ? 'text' : 'password';
+    btn.textContent = show ? '🙈' : '👁';
   });
-  document.querySelectorAll('.err-msg').forEach(e => e.classList.remove('show'));
-  showAuthTab('login');
-}
+})();
 
-// ── ANIMATE NUMBER ──
-function animateNumber(id, from, to, dur, fmt) {
-  const el = document.getElementById(id);
-  const start = performance.now();
-  function step(now) {
-    const t = Math.min(1, (now - start) / dur);
-    const ease = 1 - Math.pow(1 - t, 3);
-    const val = Math.round(from + (to - from) * ease);
-    el.innerHTML = fmt(val);
-    if (t < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
+// Lang buttons
+document.querySelectorAll('.lang-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.remove('active'); });
+    this.classList.add('active');
+  });
+});
+
+// Form submit (cosmetic for now)
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var btn = this.querySelector('.btn-submit');
+  btn.textContent = 'Connexion…';
+  btn.disabled = true;
+  setTimeout(function(){
+    btn.textContent = 'Se connecter';
+    btn.disabled = false;
+  }, 1800);
+});
 </script>
-
 </body>
 </html>
