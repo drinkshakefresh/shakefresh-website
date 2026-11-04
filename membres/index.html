@@ -144,21 +144,38 @@ nav{
   font-family:'Barlow Condensed',sans-serif;
   font-size:22px;font-weight:900;font-style:italic;
   letter-spacing:0.14em;text-transform:uppercase;
-  text-align:center;margin-bottom:28px;
+  text-align:center;margin-bottom:24px;
   text-decoration:none;display:block;
 }
 .card-logo .fresh{color:#8ECC2A;}
 
-.card-title{
+/* ── TABS ── */
+.tabs{
+  display:flex;
+  background:var(--bg3);
+  border-radius:12px;
+  padding:4px;
+  margin-bottom:28px;
+  gap:2px;
+}
+.tab-btn{
+  flex:1;
   font-family:'Barlow Condensed',sans-serif;
-  font-size:28px;font-weight:900;font-style:italic;
-  text-transform:uppercase;letter-spacing:0.04em;
-  text-align:center;margin-bottom:6px;
+  font-size:13px;font-weight:800;
+  letter-spacing:0.07em;text-transform:uppercase;
+  background:none;border:none;cursor:pointer;
+  color:var(--fg3);
+  padding:11px 8px;
+  border-radius:9px;
+  transition:color .2s,background .2s,box-shadow .2s;
+  line-height:1;white-space:nowrap;
 }
-.card-sub{
-  font-size:13px;color:var(--fg3);
-  text-align:center;margin-bottom:32px;line-height:1.5;
+.tab-btn.active{
+  background:var(--fg);
+  color:#0a0a0a;
+  box-shadow:0 2px 8px rgba(0,0,0,0.3);
 }
+.tab-btn:not(.active):hover{color:var(--fg2);}
 
 /* ── FORM ── */
 .form-group{margin-bottom:16px;}
@@ -213,26 +230,20 @@ input:focus{
 .btn-submit:active{transform:translateY(0);}
 
 .form-footer{
-  margin-top:24px;text-align:center;
+  margin-top:20px;text-align:center;
   font-size:12px;color:var(--fg3);line-height:1.6;
 }
 .form-footer a{color:var(--g);text-decoration:none;}
 .form-footer a:hover{text-decoration:underline;}
 
-.divider{
-  display:flex;align-items:center;gap:12px;
-  margin:24px 0;
-  color:var(--fg3);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
-}
-.divider::before,.divider::after{
-  content:'';flex:1;
-  height:1px;background:var(--border);
-}
-
-/* ── BENEFITS ── */
+/* ── BENEFITS (signup panel) ── */
 .benefits{
-  display:flex;flex-direction:column;gap:10px;
-  margin-bottom:28px;
+  display:flex;flex-direction:column;gap:9px;
+  margin-bottom:24px;
+  padding:16px;
+  background:var(--g1);
+  border:1px solid rgba(142,204,42,0.12);
+  border-radius:12px;
 }
 .benefit{
   display:flex;align-items:center;gap:10px;
@@ -301,57 +312,102 @@ input:focus{
   <div class="card">
     <a class="card-logo" href="../">SHAKE<span class="fresh">FRESH</span></a>
 
-    <h1 class="card-title">Espace Membre</h1>
-    <p class="card-sub">Connectez-vous pour accéder à vos avantages</p>
+    <!-- TABS -->
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="login" role="tab" aria-selected="true">Se connecter</button>
+      <button class="tab-btn" data-tab="signup" role="tab" aria-selected="false">Créer un compte</button>
+    </div>
 
-    <div class="benefits">
-      <div class="benefit">
-        <div class="benefit-dot"></div>
-        Suivi de vos points fidélité
-      </div>
-      <div class="benefit">
-        <div class="benefit-dot"></div>
-        Shakes offerts à chaque palier
-      </div>
-      <div class="benefit">
-        <div class="benefit-dot"></div>
-        Offres exclusives membres
+    <!-- PANEL LOGIN -->
+    <div id="panelLogin" role="tabpanel">
+      <form id="loginForm" autocomplete="on">
+        <div class="form-group">
+          <label for="email">Adresse e-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="vous@exemple.fr"
+            autocomplete="email"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <div class="input-wrap">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            >
+            <button type="button" class="toggle-pw" id="togglePw" aria-label="Afficher le mot de passe">👁</button>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">Se connecter</button>
+      </form>
+      <div class="form-footer">
+        <a href="#">Mot de passe oublié ?</a>
       </div>
     </div>
 
-    <form id="loginForm" autocomplete="on">
-      <div class="form-group">
-        <label for="email">Adresse e-mail</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="vous@exemple.fr"
-          autocomplete="email"
-          required
-        >
-      </div>
-      <div class="form-group">
-        <label for="password">Mot de passe</label>
-        <div class="input-wrap">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="••••••••"
-            autocomplete="current-password"
-            required
-          >
-          <button type="button" class="toggle-pw" id="togglePw" aria-label="Afficher le mot de passe">👁</button>
+    <!-- PANEL SIGNUP -->
+    <div id="panelSignup" role="tabpanel" hidden>
+      <div class="benefits">
+        <div class="benefit">
+          <div class="benefit-dot"></div>
+          Suivi de vos points fidélité
+        </div>
+        <div class="benefit">
+          <div class="benefit-dot"></div>
+          Shakes offerts à chaque palier
+        </div>
+        <div class="benefit">
+          <div class="benefit-dot"></div>
+          Offres exclusives membres
         </div>
       </div>
-      <button type="submit" class="btn-submit">Se connecter</button>
-    </form>
-
-    <div class="form-footer">
-      <a href="#">Mot de passe oublié ?</a>
-      <br>
-      Pas encore membre ?&nbsp;<a href="../#contact">Rejoindre ShakeFresh</a>
+      <form id="signupForm" autocomplete="on">
+        <div class="form-group">
+          <label for="signup-prenom">Prénom</label>
+          <input
+            type="text"
+            id="signup-prenom"
+            name="prenom"
+            placeholder="Votre prénom"
+            autocomplete="given-name"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="signup-email">Adresse e-mail</label>
+          <input
+            type="email"
+            id="signup-email"
+            name="email"
+            placeholder="vous@exemple.fr"
+            autocomplete="email"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="signup-password">Mot de passe</label>
+          <div class="input-wrap">
+            <input
+              type="password"
+              id="signup-password"
+              name="password"
+              placeholder="8 caractères minimum"
+              autocomplete="new-password"
+              required
+            >
+            <button type="button" class="toggle-pw" id="togglePw2" aria-label="Afficher le mot de passe">👁</button>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">Créer mon compte</button>
+      </form>
     </div>
   </div>
 </main>
@@ -385,10 +441,37 @@ input:focus{
   });
 })();
 
-// Toggle password
+// Tabs
+(function(){
+  var tabs = document.querySelectorAll('.tab-btn');
+  var panels = { login: document.getElementById('panelLogin'), signup: document.getElementById('panelSignup') };
+  tabs.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      tabs.forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      this.classList.add('active');
+      this.setAttribute('aria-selected','true');
+      var target = this.dataset.tab;
+      Object.keys(panels).forEach(function(k){ panels[k].hidden = (k !== target); });
+    });
+  });
+})();
+
+// Toggle password (login)
 (function(){
   var btn = document.getElementById('togglePw');
   var inp = document.getElementById('password');
+  if (!btn || !inp) return;
+  btn.addEventListener('click', function(){
+    var show = inp.type === 'password';
+    inp.type = show ? 'text' : 'password';
+    btn.textContent = show ? '🙈' : '👁';
+  });
+})();
+
+// Toggle password (signup)
+(function(){
+  var btn = document.getElementById('togglePw2');
+  var inp = document.getElementById('signup-password');
   if (!btn || !inp) return;
   btn.addEventListener('click', function(){
     var show = inp.type === 'password';
@@ -405,16 +488,22 @@ document.querySelectorAll('.lang-btn').forEach(function(btn) {
   });
 });
 
-// Form submit (cosmetic for now)
+// Login submit
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
   var btn = this.querySelector('.btn-submit');
   btn.textContent = 'Connexion…';
   btn.disabled = true;
-  setTimeout(function(){
-    btn.textContent = 'Se connecter';
-    btn.disabled = false;
-  }, 1800);
+  setTimeout(function(){ btn.textContent = 'Se connecter'; btn.disabled = false; }, 1800);
+});
+
+// Signup submit
+document.getElementById('signupForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var btn = this.querySelector('.btn-submit');
+  btn.textContent = 'Création…';
+  btn.disabled = true;
+  setTimeout(function(){ btn.textContent = 'Créer mon compte'; btn.disabled = false; }, 1800);
 });
 </script>
 </body>
