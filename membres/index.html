@@ -256,23 +256,6 @@ input:focus{
   box-shadow:0 0 6px rgba(142,204,42,0.5);
 }
 
-/* ── FOOTER ── */
-.page-footer{
-  position:fixed;bottom:0;left:0;right:0;
-  padding:16px max(20px,env(safe-area-inset-left,0px));
-  display:flex;align-items:center;justify-content:center;
-  gap:20px;
-  background:rgba(10,10,10,0.8);
-  backdrop-filter:blur(10px);
-  border-top:1px solid rgba(255,255,255,0.04);
-}
-.page-footer a{
-  font-size:11px;color:var(--fg3);text-decoration:none;
-  letter-spacing:0.05em;
-  transition:color .15s;
-}
-.page-footer a:hover{color:var(--fg2);}
-.page-footer-sep{color:rgba(255,255,255,0.1);font-size:10px;}
 </style>
 </head>
 <body>
@@ -280,9 +263,9 @@ input:focus{
 <!-- NAV -->
 <nav>
   <div class="nav-left">
-    <a class="nav-link active" href="./">Espace membre</a>
     <a class="nav-link" href="../la-machine/">La Machine</a>
     <a class="nav-link" href="../#espaces">Nos Espaces</a>
+    <a class="nav-link nav-membre active" href="./">Espace membre</a>
   </div>
   <a class="nav-wordmark" href="../">SHAKE<span class="nav-fresh">FRESH</span></a>
   <div class="nav-right">
@@ -297,9 +280,9 @@ input:focus{
   </button>
 </nav>
 <div class="nav-mobile" id="navMobile">
-  <a class="nav-mobile-link active" href="./">Espace membre</a>
   <a class="nav-mobile-link" href="../la-machine/">La Machine</a>
   <a class="nav-mobile-link" href="../#espaces">Nos Espaces</a>
+  <a class="nav-mobile-link nav-mobile-membre active" href="./">Espace membre</a>
   <div class="lang-switch">
     <button class="lang-btn active" data-lang="fr">FR</button>
     <span class="lang-sep">|</span>
@@ -314,15 +297,15 @@ input:focus{
 
     <!-- TABS -->
     <div class="tabs" role="tablist">
-      <button class="tab-btn active" data-tab="login" role="tab" aria-selected="true">Se connecter</button>
-      <button class="tab-btn" data-tab="signup" role="tab" aria-selected="false">Créer un compte</button>
+      <button class="tab-btn tab-login active" data-tab="login" role="tab" aria-selected="true">Se connecter</button>
+      <button class="tab-btn tab-signup" data-tab="signup" role="tab" aria-selected="false">Créer un compte</button>
     </div>
 
     <!-- PANEL LOGIN -->
     <div id="panelLogin" role="tabpanel">
       <form id="loginForm" autocomplete="on">
         <div class="form-group">
-          <label for="email">Adresse e-mail</label>
+          <label for="email" data-i18n="lbl-email">Adresse e-mail</label>
           <input
             type="email"
             id="email"
@@ -333,7 +316,7 @@ input:focus{
           >
         </div>
         <div class="form-group">
-          <label for="password">Mot de passe</label>
+          <label for="password" data-i18n="lbl-password">Mot de passe</label>
           <div class="input-wrap">
             <input
               type="password"
@@ -346,10 +329,10 @@ input:focus{
             <button type="button" class="toggle-pw" id="togglePw" aria-label="Afficher le mot de passe">👁</button>
           </div>
         </div>
-        <button type="submit" class="btn-submit">Se connecter</button>
+        <button type="submit" class="btn-submit" data-i18n="btn-login">Se connecter</button>
       </form>
       <div class="form-footer">
-        <a href="#">Mot de passe oublié ?</a>
+        <a href="#" data-i18n="link-forgot">Mot de passe oublié ?</a>
       </div>
     </div>
 
@@ -358,20 +341,20 @@ input:focus{
       <div class="benefits">
         <div class="benefit">
           <div class="benefit-dot"></div>
-          Suivi de vos points fidélité
+          <span data-i18n="ben-1">Suivi de vos points fidélité</span>
         </div>
         <div class="benefit">
           <div class="benefit-dot"></div>
-          Shakes offerts à chaque palier
+          <span data-i18n="ben-2">Shakes offerts à chaque palier</span>
         </div>
         <div class="benefit">
           <div class="benefit-dot"></div>
-          Offres exclusives membres
+          <span data-i18n="ben-3">Offres exclusives membres</span>
         </div>
       </div>
       <form id="signupForm" autocomplete="on">
         <div class="form-group">
-          <label for="signup-prenom">Prénom</label>
+          <label for="signup-prenom" data-i18n="lbl-prenom">Prénom</label>
           <input
             type="text"
             id="signup-prenom"
@@ -382,7 +365,7 @@ input:focus{
           >
         </div>
         <div class="form-group">
-          <label for="signup-email">Adresse e-mail</label>
+          <label for="signup-email" data-i18n="lbl-email2">Adresse e-mail</label>
           <input
             type="email"
             id="signup-email"
@@ -393,7 +376,7 @@ input:focus{
           >
         </div>
         <div class="form-group">
-          <label for="signup-password">Mot de passe</label>
+          <label for="signup-password" data-i18n="lbl-password2">Mot de passe</label>
           <div class="input-wrap">
             <input
               type="password"
@@ -406,22 +389,11 @@ input:focus{
             <button type="button" class="toggle-pw" id="togglePw2" aria-label="Afficher le mot de passe">👁</button>
           </div>
         </div>
-        <button type="submit" class="btn-submit">Créer mon compte</button>
+        <button type="submit" class="btn-submit" data-i18n="btn-signup">Créer mon compte</button>
       </form>
     </div>
   </div>
 </main>
-
-<!-- FOOTER -->
-<footer class="page-footer">
-  <a href="../">Accueil</a>
-  <span class="page-footer-sep">·</span>
-  <a href="../la-machine/">La Machine</a>
-  <span class="page-footer-sep">·</span>
-  <a href="../#contact">Contact</a>
-  <span class="page-footer-sep">·</span>
-  <span style="font-size:11px;color:rgba(255,255,255,0.15);">© 2026 ShakeFresh</span>
-</footer>
 
 <script>
 // Hamburger
@@ -480,11 +452,91 @@ input:focus{
   });
 })();
 
-// Lang buttons
+// Lang / i18n
+var translations = {
+  fr: {
+    'nav-membre': 'Espace membre',
+    'tab-login': 'Se connecter',
+    'tab-signup': 'Créer un compte',
+    'lbl-email': 'Adresse e-mail',
+    'ph-email': 'vous@exemple.fr',
+    'lbl-password': 'Mot de passe',
+    'ph-password': '••••••••',
+    'btn-login': 'Se connecter',
+    'link-forgot': 'Mot de passe oublié ?',
+    'ben-1': 'Suivi de vos points fidélité',
+    'ben-2': 'Shakes offerts à chaque palier',
+    'ben-3': 'Offres exclusives membres',
+    'lbl-prenom': 'Prénom',
+    'ph-prenom': 'Votre prénom',
+    'lbl-email2': 'Adresse e-mail',
+    'ph-email2': 'vous@exemple.fr',
+    'lbl-password2': 'Mot de passe',
+    'ph-password2': '8 caractères minimum',
+    'btn-signup': 'Créer mon compte',
+    'submit-login-loading': 'Connexion…',
+    'submit-signup-loading': 'Création…',
+  },
+  en: {
+    'nav-membre': 'Member Area',
+    'tab-login': 'Log in',
+    'tab-signup': 'Create account',
+    'lbl-email': 'Email address',
+    'ph-email': 'you@example.com',
+    'lbl-password': 'Password',
+    'ph-password': '••••••••',
+    'btn-login': 'Log in',
+    'link-forgot': 'Forgot password?',
+    'ben-1': 'Track your loyalty points',
+    'ben-2': 'Free shakes at each milestone',
+    'ben-3': 'Exclusive member offers',
+    'lbl-prenom': 'First name',
+    'ph-prenom': 'Your first name',
+    'lbl-email2': 'Email address',
+    'ph-email2': 'you@example.com',
+    'lbl-password2': 'Password',
+    'ph-password2': '8 characters minimum',
+    'btn-signup': 'Create my account',
+    'submit-login-loading': 'Logging in…',
+    'submit-signup-loading': 'Creating…',
+  }
+};
+var currentLang = 'fr';
+function applyLang(lang) {
+  var t = translations[lang];
+  var map = {
+    'nav-membre': ['.nav-membre', '.nav-mobile-membre'],
+    'tab-login': ['.tab-login'],
+    'tab-signup': ['.tab-signup'],
+    'lbl-email': ['[data-i18n="lbl-email"]'],
+    'lbl-password': ['[data-i18n="lbl-password"]'],
+    'btn-login': ['[data-i18n="btn-login"]'],
+    'link-forgot': ['[data-i18n="link-forgot"]'],
+    'ben-1': ['[data-i18n="ben-1"]'],
+    'ben-2': ['[data-i18n="ben-2"]'],
+    'ben-3': ['[data-i18n="ben-3"]'],
+    'lbl-prenom': ['[data-i18n="lbl-prenom"]'],
+    'lbl-email2': ['[data-i18n="lbl-email2"]'],
+    'lbl-password2': ['[data-i18n="lbl-password2"]'],
+    'btn-signup': ['[data-i18n="btn-signup"]'],
+  };
+  Object.keys(map).forEach(function(key) {
+    map[key].forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el) { el.textContent = t[key]; });
+    });
+  });
+  // placeholders
+  var ph = { 'email': t['ph-email'], 'password': t['ph-password'], 'signup-prenom': t['ph-prenom'], 'signup-email': t['ph-email2'], 'signup-password': t['ph-password2'] };
+  Object.keys(ph).forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.placeholder = ph[id];
+  });
+  currentLang = lang;
+}
 document.querySelectorAll('.lang-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.remove('active'); });
     this.classList.add('active');
+    applyLang(this.dataset.lang);
   });
 });
 
@@ -492,18 +544,20 @@ document.querySelectorAll('.lang-btn').forEach(function(btn) {
 document.getElementById('loginForm').addEventListener('submit', function(e){
   e.preventDefault();
   var btn = this.querySelector('.btn-submit');
-  btn.textContent = 'Connexion…';
+  var t = translations[currentLang];
+  btn.textContent = t['submit-login-loading'];
   btn.disabled = true;
-  setTimeout(function(){ btn.textContent = 'Se connecter'; btn.disabled = false; }, 1800);
+  setTimeout(function(){ btn.textContent = t['btn-login']; btn.disabled = false; }, 1800);
 });
 
 // Signup submit
 document.getElementById('signupForm').addEventListener('submit', function(e){
   e.preventDefault();
   var btn = this.querySelector('.btn-submit');
-  btn.textContent = 'Création…';
+  var t = translations[currentLang];
+  btn.textContent = t['submit-signup-loading'];
   btn.disabled = true;
-  setTimeout(function(){ btn.textContent = 'Créer mon compte'; btn.disabled = false; }, 1800);
+  setTimeout(function(){ btn.textContent = t['btn-signup']; btn.disabled = false; }, 1800);
 });
 </script>
 </body>
