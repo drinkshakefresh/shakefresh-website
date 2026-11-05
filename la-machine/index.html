@@ -458,9 +458,9 @@ footer{
 <!-- NAV -->
 <nav>
   <div class="nav-left">
-    <a class="nav-link" href="../membres/">Espace membre</a>
     <a class="nav-link active" href="../la-machine/">La Machine</a>
-    <a class="nav-link" href="../#espaces">Nos Espaces</a>
+    <a class="nav-link" href="../#espaces" data-i18n="nav-espaces">Nos Espaces</a>
+    <a class="nav-link nav-membre" href="../membres/" data-i18n="nav-membre">Espace membre</a>
   </div>
   <a class="nav-wordmark" href="../">SHAKE<span class="nav-fresh">FRESH</span></a>
   <div class="nav-right">
@@ -475,9 +475,9 @@ footer{
   </button>
 </nav>
 <div class="nav-mobile" id="navMobile">
-  <a class="nav-mobile-link" href="../membres/">Espace membre</a>
   <a class="nav-mobile-link active" href="../la-machine/">La Machine</a>
-  <a class="nav-mobile-link" href="../#espaces">Nos Espaces</a>
+  <a class="nav-mobile-link" href="../#espaces" data-i18n="nav-espaces">Nos Espaces</a>
+  <a class="nav-mobile-link nav-mobile-membre" href="../membres/" data-i18n="nav-membre">Espace membre</a>
   <div class="lang-switch">
     <button class="lang-btn active" data-lang="fr">FR</button>
     <span class="lang-sep">|</span>
@@ -488,12 +488,12 @@ footer{
 <!-- HERO -->
 <section class="hero">
   <div class="hero-orb"></div>
-  <p class="hero-eyebrow">La Machine</p>
-  <h1 class="hero-h1">Conçue pour<br><span class="hl">aller vite.</span></h1>
-  <p class="hero-sub">Un seul appui. 60 secondes. Un shake protéiné frais — sans barman, sans file d'attente, sans compromis.</p>
+  <p class="hero-eyebrow" data-i18n="hero-eyebrow">La Machine</p>
+  <h1 class="hero-h1" data-i18n-html="hero-h1">Conçue pour<br><span class="hl">aller vite.</span></h1>
+  <p class="hero-sub" data-i18n="hero-sub">Un seul appui. 60 secondes. Un shake protéiné frais — sans barman, sans file d'attente, sans compromis.</p>
   <div class="hero-scroll">
     <div class="hero-scroll-line"></div>
-    Découvrir
+    <span data-i18n="hero-scroll">Découvrir</span>
   </div>
 </section>
 
@@ -503,7 +503,7 @@ footer{
   <div class="machine-visual">
     <div class="machine-label-left">
       <div class="machine-label-line"></div>
-      Écran tactile 27"
+      <span data-i18n="label-screen">Écran tactile 27"</span>
     </div>
     <div class="machine-label-right">
       <div class="machine-label-line"></div>
@@ -513,8 +513,8 @@ footer{
       <div class="machine-screen">
         <div class="machine-screen-inner">
           <div class="machine-screen-logo">ShakeFresh</div>
-          <div class="machine-screen-sub">Choisis ton shake</div>
-          <div class="machine-screen-btn">Commander →</div>
+          <div class="machine-screen-sub" data-i18n="screen-sub">Choisis ton shake</div>
+          <div class="machine-screen-btn" data-i18n="screen-btn">Commander →</div>
         </div>
         <div class="machine-screen-glow"></div>
       </div>
@@ -536,21 +536,21 @@ footer{
 
   <!-- Info -->
   <div class="visual-info">
-    <span class="eyebrow">Autonome. Précise. Toujours prête.</span>
-    <h2 class="visual-h2">Sous le <span style="color:var(--green)">capot</span></h2>
-    <p class="visual-lead">La machine ShakeFresh dose, mélange et sert automatiquement. Elle ne requiert aucune intervention humaine entre deux utilisations — juste un réapprovisionnement que l'équipe ShakeFresh gère pour vous.</p>
+    <span class="eyebrow" data-i18n="visual-eyebrow">Autonome. Précise. Toujours prête.</span>
+    <h2 class="visual-h2" data-i18n-html="visual-h2">Sous le <span style="color:var(--green)">capot</span></h2>
+    <p class="visual-lead" data-i18n="visual-lead">La machine ShakeFresh dose, mélange et sert automatiquement. Elle ne requiert aucune intervention humaine entre deux utilisations — juste un réapprovisionnement que l'équipe ShakeFresh gère pour vous.</p>
     <div class="mini-stats">
       <div class="mini-stat">
         <div class="mini-stat-val">60s</div>
-        <div class="mini-stat-label">Préparation</div>
+        <div class="mini-stat-label" data-i18n="stat-prep">Préparation</div>
       </div>
       <div class="mini-stat">
         <div class="mini-stat-val">7</div>
-        <div class="mini-stat-label">Références max</div>
+        <div class="mini-stat-label" data-i18n="stat-refs">Références max</div>
       </div>
       <div class="mini-stat">
         <div class="mini-stat-val">24h</div>
-        <div class="mini-stat-label">Disponible</div>
+        <div class="mini-stat-label" data-i18n="stat-dispo">Disponible</div>
       </div>
     </div>
   </div>
@@ -558,76 +558,76 @@ footer{
 
 <!-- SPECS -->
 <section class="specs-section">
-  <span class="eyebrow">Fiche technique</span>
-  <h2 class="specs-h2">Tout ce qu'il <span style="color:var(--green)">faut savoir</span></h2>
+  <span class="eyebrow" data-i18n="specs-eyebrow">Fiche technique</span>
+  <h2 class="specs-h2" data-i18n-html="specs-h2">Tout ce qu'il <span style="color:var(--green)">faut savoir</span></h2>
   <div class="specs-grid">
     <div class="spec-row">
-      <span class="spec-label">Préparation</span>
-      <span class="spec-val">60 à 90 secondes — fraîche, froide, prête.</span>
+      <span class="spec-label" data-i18n="spec-label-1">Préparation</span>
+      <span class="spec-val" data-i18n="spec-val-1">60 à 90 secondes — fraîche, froide, prête.</span>
     </div>
     <div class="spec-row">
-      <span class="spec-label">Interface</span>
-      <span class="spec-val">Écran tactile 27 pouces Android</span>
+      <span class="spec-label" data-i18n="spec-label-2">Interface</span>
+      <span class="spec-val" data-i18n="spec-val-2">Écran tactile 27 pouces Android</span>
     </div>
     <div class="spec-row">
-      <span class="spec-label">Ingrédients</span>
-      <span class="spec-val">Jusqu'à 7 canisters — environ 4 L chacun</span>
+      <span class="spec-label" data-i18n="spec-label-3">Ingrédients</span>
+      <span class="spec-val" data-i18n="spec-val-3">Jusqu'à 7 canisters — environ 4 L chacun</span>
     </div>
     <div class="spec-row">
-      <span class="spec-label">Paiement</span>
-      <span class="spec-val">Carte bancaire &amp; sans contact (NFC)</span>
+      <span class="spec-label" data-i18n="spec-label-4">Paiement</span>
+      <span class="spec-val" data-i18n="spec-val-4">Carte bancaire &amp; sans contact (NFC)</span>
     </div>
     <div class="spec-row">
-      <span class="spec-label">Connectivité</span>
-      <span class="spec-val">Wi-Fi / 4G — supervision cloud en temps réel</span>
+      <span class="spec-label" data-i18n="spec-label-5">Connectivité</span>
+      <span class="spec-val" data-i18n="spec-val-5">Wi-Fi / 4G — supervision cloud en temps réel</span>
     </div>
     <div class="spec-row">
-      <span class="spec-label">Installation</span>
-      <span class="spec-val">0 € — prise en charge intégrale par ShakeFresh</span>
+      <span class="spec-label" data-i18n="spec-label-6">Installation</span>
+      <span class="spec-val" data-i18n="spec-val-6">0 € — prise en charge intégrale par ShakeFresh</span>
     </div>
     <div class="spec-row">
-      <span class="spec-label">Maintenance</span>
-      <span class="spec-val">Intervention le jour même ou sous 48h max</span>
+      <span class="spec-label" data-i18n="spec-label-7">Maintenance</span>
+      <span class="spec-val" data-i18n="spec-val-7">Intervention le jour même ou sous 48h max</span>
     </div>
     <div class="spec-row">
-      <span class="spec-label">Réapprovisionnement</span>
-      <span class="spec-val">Géré par ShakeFresh — zéro action de votre côté</span>
+      <span class="spec-label" data-i18n="spec-label-8">Réapprovisionnement</span>
+      <span class="spec-val" data-i18n="spec-val-8">Géré par ShakeFresh — zéro action de votre côté</span>
     </div>
   </div>
 </section>
 
 <!-- FLOW -->
 <section class="flow-section">
-  <span class="eyebrow">En 3 temps</span>
-  <h2 class="flow-h2">Simple comme <span style="color:var(--green)">bonjour</span></h2>
+  <span class="eyebrow" data-i18n="flow-eyebrow">En 3 temps</span>
+  <h2 class="flow-h2" data-i18n-html="flow-h2">Simple comme <span style="color:var(--green)">bonjour</span></h2>
   <div class="flow-steps">
     <div class="flow-step">
       <div class="flow-num">1</div>
-      <div class="flow-title">Je choisis</div>
-      <div class="flow-desc">L'utilisateur sélectionne sa protéine et ses suppléments sur l'écran tactile.</div>
+      <div class="flow-title" data-i18n="flow-title-1">Je choisis</div>
+      <div class="flow-desc" data-i18n="flow-desc-1">L'utilisateur sélectionne sa protéine et ses suppléments sur l'écran tactile.</div>
     </div>
     <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-num">2</div>
-      <div class="flow-title">La machine prépare</div>
-      <div class="flow-desc">En 60 secondes, la machine dose et mélange. Fraîcheur garantie à chaque fois.</div>
+      <div class="flow-title" data-i18n="flow-title-2">La machine prépare</div>
+      <div class="flow-desc" data-i18n="flow-desc-2">En 60 secondes, la machine dose et mélange. Fraîcheur garantie à chaque fois.</div>
     </div>
     <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-num">3</div>
-      <div class="flow-title">Je récupère</div>
-      <div class="flow-desc">Le shake est prêt à consommer. L'utilisateur repart — sans attente, sans prep.</div>
+      <div class="flow-title" data-i18n="flow-title-3">Je récupère</div>
+      <div class="flow-desc" data-i18n="flow-desc-3">Le shake est prêt à consommer. L'utilisateur repart — sans attente, sans prep.</div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section">
-  <span class="eyebrow">Intéressé ?</span>
-  <h2 class="cta-h2">Installez ShakeFresh<br><span style="color:var(--green)">dans votre espace</span></h2>
+  <span class="eyebrow" data-i18n="cta-eyebrow">Intéressé ?</span>
+  <h2 class="cta-h2" data-i18n-html="cta-h2">Installez ShakeFresh<br><span style="color:var(--green)">dans votre espace</span></h2>
   <div>
-    <a href="../#contact" class="btn-green">Devenir partenaire</a>
-    <a href="../" class="btn-ghost">Retour à l'accueil</a>
+    <a href="../#contact" class="btn-green" data-i18n="cta-btn-green">Devenir partenaire</a>
+    <a href="../" class="btn-ghost" data-i18n="cta-btn-ghost">Retour à l'accueil</a>
   </div>
 </section>
 
@@ -638,6 +638,135 @@ footer{
 </footer>
 
 <script>
+// ── i18n ──
+var translations = {
+  fr: {
+    'nav-membre':    'Espace membre',
+    'nav-espaces':   'Nos Espaces',
+    'hero-eyebrow':  'La Machine',
+    'hero-h1':       'Conçue pour<br><span class="hl">aller vite.</span>',
+    'hero-sub':      'Un seul appui. 60 secondes. Un shake protéiné frais — sans barman, sans file d\'attente, sans compromis.',
+    'hero-scroll':   'Découvrir',
+    'label-screen':  'Écran tactile 27"',
+    'screen-sub':    'Choisis ton shake',
+    'screen-btn':    'Commander →',
+    'visual-eyebrow':'Autonome. Précise. Toujours prête.',
+    'visual-h2':     'Sous le <span style="color:var(--green)">capot</span>',
+    'visual-lead':   'La machine ShakeFresh dose, mélange et sert automatiquement. Elle ne requiert aucune intervention humaine entre deux utilisations — juste un réapprovisionnement que l\'équipe ShakeFresh gère pour vous.',
+    'stat-prep':     'Préparation',
+    'stat-refs':     'Références max',
+    'stat-dispo':    'Disponible',
+    'specs-eyebrow': 'Fiche technique',
+    'specs-h2':      'Tout ce qu\'il <span style="color:var(--green)">faut savoir</span>',
+    'spec-label-1':  'Préparation',
+    'spec-val-1':    '60 à 90 secondes — fraîche, froide, prête.',
+    'spec-label-2':  'Interface',
+    'spec-val-2':    'Écran tactile 27 pouces Android',
+    'spec-label-3':  'Ingrédients',
+    'spec-val-3':    'Jusqu\'à 7 canisters — environ 4 L chacun',
+    'spec-label-4':  'Paiement',
+    'spec-val-4':    'Carte bancaire & sans contact (NFC)',
+    'spec-label-5':  'Connectivité',
+    'spec-val-5':    'Wi-Fi / 4G — supervision cloud en temps réel',
+    'spec-label-6':  'Installation',
+    'spec-val-6':    '0 € — prise en charge intégrale par ShakeFresh',
+    'spec-label-7':  'Maintenance',
+    'spec-val-7':    'Intervention le jour même ou sous 48h max',
+    'spec-label-8':  'Réapprovisionnement',
+    'spec-val-8':    'Géré par ShakeFresh — zéro action de votre côté',
+    'flow-eyebrow':  'En 3 temps',
+    'flow-h2':       'Simple comme <span style="color:var(--green)">bonjour</span>',
+    'flow-title-1':  'Je choisis',
+    'flow-desc-1':   'L\'utilisateur sélectionne sa protéine et ses suppléments sur l\'écran tactile.',
+    'flow-title-2':  'La machine prépare',
+    'flow-desc-2':   'En 60 secondes, la machine dose et mélange. Fraîcheur garantie à chaque fois.',
+    'flow-title-3':  'Je récupère',
+    'flow-desc-3':   'Le shake est prêt à consommer. L\'utilisateur repart — sans attente, sans prep.',
+    'cta-eyebrow':   'Intéressé ?',
+    'cta-h2':        'Installez ShakeFresh<br><span style="color:var(--green)">dans votre espace</span>',
+    'cta-btn-green': 'Devenir partenaire',
+    'cta-btn-ghost': 'Retour à l\'accueil'
+  },
+  en: {
+    'nav-membre':    'Member area',
+    'nav-espaces':   'Our Spaces',
+    'hero-eyebrow':  'The Machine',
+    'hero-h1':       'Built to<br><span class="hl">go fast.</span>',
+    'hero-sub':      'One tap. 60 seconds. A fresh protein shake — no staff, no queue, no compromise.',
+    'hero-scroll':   'Discover',
+    'label-screen':  '27" touch screen',
+    'screen-sub':    'Choose your shake',
+    'screen-btn':    'Order →',
+    'visual-eyebrow':'Autonomous. Precise. Always ready.',
+    'visual-h2':     'Under the <span style="color:var(--green)">hood</span>',
+    'visual-lead':   'The ShakeFresh machine automatically doses, blends, and serves. It requires no human intervention between uses — just restocking handled by the ShakeFresh team.',
+    'stat-prep':     'Prep time',
+    'stat-refs':     'Max varieties',
+    'stat-dispo':    'Available',
+    'specs-eyebrow': 'Technical specs',
+    'specs-h2':      'Everything you <span style="color:var(--green)">need to know</span>',
+    'spec-label-1':  'Prep time',
+    'spec-val-1':    '60 to 90 seconds — fresh, cold, ready.',
+    'spec-label-2':  'Interface',
+    'spec-val-2':    '27-inch Android touch screen',
+    'spec-label-3':  'Ingredients',
+    'spec-val-3':    'Up to 7 canisters — approx. 4 L each',
+    'spec-label-4':  'Payment',
+    'spec-val-4':    'Credit card & contactless (NFC)',
+    'spec-label-5':  'Connectivity',
+    'spec-val-5':    'Wi-Fi / 4G — real-time cloud monitoring',
+    'spec-label-6':  'Installation',
+    'spec-val-6':    '€0 — fully covered by ShakeFresh',
+    'spec-label-7':  'Maintenance',
+    'spec-val-7':    'Same-day or within 48h response',
+    'spec-label-8':  'Restocking',
+    'spec-val-8':    'Managed by ShakeFresh — zero effort on your end',
+    'flow-eyebrow':  'In 3 steps',
+    'flow-h2':       'As easy as <span style="color:var(--green)">it gets</span>',
+    'flow-title-1':  'I choose',
+    'flow-desc-1':   'The user selects their protein and supplements on the touch screen.',
+    'flow-title-2':  'The machine prepares',
+    'flow-desc-2':   'In 60 seconds, the machine doses and blends. Freshness guaranteed every time.',
+    'flow-title-3':  'I collect',
+    'flow-desc-3':   'The shake is ready to drink. The user walks away — no wait, no prep.',
+    'cta-eyebrow':   'Interested?',
+    'cta-h2':        'Install ShakeFresh<br><span style="color:var(--green)">in your space</span>',
+    'cta-btn-green': 'Become a partner',
+    'cta-btn-ghost': 'Back to home'
+  }
+};
+
+var currentLang = 'fr';
+
+function applyLang(lang) {
+  var t = translations[lang];
+  if (!t) return;
+  // textContent elements
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  // innerHTML elements (contain HTML like spans)
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+  currentLang = lang;
+}
+
+// Lang button handlers — all .lang-btn on the page (desktop + mobile share same keys)
+document.querySelectorAll('.lang-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var lang = this.dataset.lang;
+    document.querySelectorAll('.lang-btn').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    applyLang(lang);
+  });
+});
+
 // Hamburger
 (function(){
   var burger = document.getElementById('navBurger');
@@ -654,14 +783,6 @@ footer{
     });
   });
 })();
-
-// Lang buttons (cosmetic — same page for now)
-document.querySelectorAll('.lang-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.remove('active'); });
-    this.classList.add('active');
-  });
-});
 </script>
 </body>
 </html>
